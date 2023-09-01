@@ -9,10 +9,39 @@ using System.Threading.Tasks;
 
 namespace Homework_12_notMVVM.Model.Data
 {
-    internal class ClientBase
+    internal class ClientBase //реализовать СЧЕТА!
     {
         private string _pathToData;
         private List<Client> _clients;
+
+        /// <summary>
+        /// Добавление клиента
+        /// </summary>
+        /// <param name="client"></param>
+        public void Add(Client client)
+        {
+            _clients.Add(client);
+            Save();
+        }
+
+        /// <summary>
+        /// Удаление клиента по id
+        /// </summary>
+        /// <param name="client"></param>
+        public void Remove(int id)
+        {
+            _clients.Remove(_clients.Find(c => c.Id == id));            
+            Save();
+        }
+
+        /// <summary>
+        /// Получает уникальный Id нового клиента
+        /// </summary>
+        /// <returns></returns>
+        public int GetNewId()
+        {
+            return _clients.Max(c => c.Id) + 1;
+        }
 
         public ClientBase(string pathToData) 
         {
