@@ -15,14 +15,25 @@ using System.Windows.Shapes;
 
 namespace Homework_12_notMVVM
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
-    public partial class MainWindow : Window
+    
+    public partial class AuthorizationWindow : Window
     {
-        public MainWindow()
+        public AuthorizationWindow()
         {
             InitializeComponent();
+        }
+
+        private void EntryButton_Click(object sender, RoutedEventArgs e)
+        {
+            switch (ChooseWorker.Text)
+            {
+                case "Менеджер":
+
+                    break;
+
+                default:
+                    break;
+            }
         }
     }
 }
