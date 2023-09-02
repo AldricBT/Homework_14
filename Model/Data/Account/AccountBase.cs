@@ -14,11 +14,16 @@ namespace Homework_12_notMVVM.Model.Data.Account
             EUR,
             RUR
         }
+        public enum AccountTypeEnum
+        {
+            Savings,
+            Payment
+        }
 
-        private int _id;
+        private readonly int _id;
         private double _money;
-        private CurrencyEnum _currency;
-        private int _clientId;
+        private readonly CurrencyEnum _currency;
+        private readonly int _clientId;
 
         public int Id
         {

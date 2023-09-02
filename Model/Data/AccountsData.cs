@@ -15,9 +15,14 @@ namespace Homework_12_notMVVM.Model.Data
         {
             
         }
-
+        /// <summary>
+        /// Получает уникальный Id нового счета
+        /// </summary>
+        /// <returns></returns>
         public override int GetNewId()
         {
+            if (Data.Count == 0)
+                return 1;
             return Data.Max(c => c.Id) + 1;
         }
     }
