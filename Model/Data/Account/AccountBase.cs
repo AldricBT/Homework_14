@@ -41,10 +41,20 @@ namespace Homework_12_notMVVM.Model.Data.Account
         {
             get => _clientId;
         }
-        public AccountBase(int id, double money, CurrencyEnum currency, int clientId) //параметр money нужен для сериализатора
+        
+        
+        public AccountBase(int id, CurrencyEnum currency, int clientId)
         {
             _id = id;
             _money = 0;
+            _currency = currency;
+            _clientId = clientId;
+        }
+
+        public AccountBase(int id, double money, CurrencyEnum currency, int clientId) //для сериализатора
+        {
+            _id = id;
+            _money = money;
             _currency = currency;
             _clientId = clientId;
         }
