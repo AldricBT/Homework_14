@@ -97,8 +97,12 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Model\Data\AccountsData.cs" />
+    <Compile Include="Model\Data\Account\AccountBase.cs" />
+    <Compile Include="Model\Data\Account\AccountPayment.cs" />
+    <Compile Include="Model\Data\Account\AccountSavings.cs" />
     <Compile Include="Model\Data\Client.cs" />
-    <Compile Include="Model\Data\ClientBase.cs" />
+    <Compile Include="Model\Data\ClientsData.cs" />
     <Compile Include="Model\Workers\Worker.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>

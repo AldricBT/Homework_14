@@ -9,7 +9,7 @@ namespace Homework_12_notMVVM.Model.Workers
 {
     internal abstract class Worker
     {
-        private readonly ClientBase _clientsBase;  //истинные данные клиентов из базы данных
+        private readonly ClientsData _clientsBase;  //истинные данные клиентов из базы данных
 
         public Worker()
         {

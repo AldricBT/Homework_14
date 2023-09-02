@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Homework_12_notMVVM.Model.Data
 {
-    internal class ClientBase //реализовать СЧЕТА!
+    internal class ClientsData //реализовать СЧЕТА!
     {
         private string _pathToData;
         private List<Client> _clients;
@@ -43,7 +43,7 @@ namespace Homework_12_notMVVM.Model.Data
             return _clients.Max(c => c.Id) + 1;
         }
 
-        public ClientBase(string pathToData) 
+        public ClientsData(string pathToData) 
         {
             _pathToData = pathToData;
             _clients = new List<Client>();
