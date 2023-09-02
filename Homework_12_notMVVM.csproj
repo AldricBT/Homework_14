@@ -101,6 +101,7 @@
     <Compile Include="Model\Data\Account\AccountBase.cs" />
     <Compile Include="Model\Data\Account\AccountPayment.cs" />
     <Compile Include="Model\Data\Account\AccountSavings.cs" />
+    <Compile Include="Model\Data\DataBase.cs" />
     <Compile Include="Model\Data\Client.cs" />
     <Compile Include="Model\Data\ClientsData.cs" />
     <Compile Include="Model\Workers\Worker.cs" />

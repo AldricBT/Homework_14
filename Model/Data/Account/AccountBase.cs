@@ -18,6 +18,8 @@ namespace Homework_12_notMVVM.Model.Data.Account
         private int _id;
         private double _money;
         private CurrencyEnum _currency;
+        private int _clientId;
+
         public int Id
         {
             get => _id;
@@ -30,11 +32,16 @@ namespace Homework_12_notMVVM.Model.Data.Account
         {
             get => _currency;
         }
-        public AccountBase(int id, double money, CurrencyEnum currency) //параметр money нужен для сериализатора
+        public int ClientId
+        {
+            get => _clientId;
+        }
+        public AccountBase(int id, double money, CurrencyEnum currency, int clientId) //параметр money нужен для сериализатора
         {
             _id = id;
             _money = 0;
             _currency = currency;
+            _clientId = clientId;
         }
 
         /// <summary>

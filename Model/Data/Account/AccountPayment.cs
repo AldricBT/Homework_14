@@ -8,8 +8,8 @@ namespace Homework_12_notMVVM.Model.Data.Account
 {
     internal class AccountPayment : AccountBase
     {
-        public AccountPayment(int id, double money, CurrencyEnum currency) :
-            base(id, money, currency)
+        public AccountPayment(int id, double money, CurrencyEnum currency, int clientId) :
+            base(id, money, currency, clientId)
         {
             
         }
