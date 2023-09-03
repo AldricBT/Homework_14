@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -8,12 +9,12 @@ using System.Threading.Tasks;
 
 namespace Homework_12_notMVVM.Model.Data
 {
-    internal abstract class DataBase<T>
+    internal abstract class DataBase<T> where T : class
     {
         private readonly string _pathToData;
-        private List<T> _dataList;
+        private ObservableCollection<T> _dataList;
 
-        public List<T> Data
+        public ObservableCollection<T> Data
         {
             get => _dataList;
         }
@@ -49,7 +50,7 @@ namespace Homework_12_notMVVM.Model.Data
         public DataBase(string pathToData)
         {
             _pathToData = pathToData;
-            _dataList = new List<T>();
+            _dataList = new ObservableCollection<T>();
 
             if (File.Exists(_pathToData))
                 Load();            
@@ -62,7 +63,7 @@ namespace Homework_12_notMVVM.Model.Data
         {
             string jsonString = File.ReadAllText(_pathToData);
             if (jsonString != null)
-                _dataList = JsonSerializer.Deserialize<List<T>>(jsonString);
+                _dataList = JsonSerializer.Deserialize<ObservableCollection<T>>(jsonString);
         }
 
         /// <summary>

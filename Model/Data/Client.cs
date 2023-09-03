@@ -52,7 +52,7 @@ namespace Homework_12_notMVVM.Model.Data
             //добавление ссылки на счет клиента в данные клиента
             _accounts = new List<AccountBase>
             {
-                StaticMainData.Accounts.Data.Find( a => a.Id == newAccontId)
+                StaticMainData.Accounts.Data.Where( a => a.Id == newAccontId).First()
             };
         }
 
@@ -68,7 +68,7 @@ namespace Homework_12_notMVVM.Model.Data
             //добавление ссылки на счет клиента в данные клиента
             _accounts = new List<AccountBase>
             {
-                StaticMainData.Accounts.Data.Find( a => a.Id == newAccontId)
+                StaticMainData.Accounts.Data.Where( a => a.Id == newAccontId).First()
             };
         }
 

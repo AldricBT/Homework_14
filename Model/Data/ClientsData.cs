@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Homework_12_notMVVM.Model.Data
 {
-    internal class ClientsData : DataBase<Client> //реализовать СЧЕТА!
+    internal class ClientsData : DataBase<Client>
     {                       
 
         /// <summary>
@@ -18,7 +18,7 @@ namespace Homework_12_notMVVM.Model.Data
         /// <param name="client"></param>
         public void RemoveId(int id)
         {
-            Data.Remove(Data.Find(c => c.Id == id));            
+            Data.Remove(Data.Where(c => c.Id == id).First());            
             Save();
         }
 
