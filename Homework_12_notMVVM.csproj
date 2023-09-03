@@ -105,6 +105,8 @@
     <Compile Include="Model\Data\Client.cs" />
     <Compile Include="Model\Data\ClientsData.cs" />
     <Compile Include="Model\Data\StaticMainData.cs" />
+    <Compile Include="Model\Workers\Consultant.cs" />
+    <Compile Include="Model\Workers\Manager.cs" />
     <Compile Include="Model\Workers\Worker.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>

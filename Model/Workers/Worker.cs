@@ -59,16 +59,16 @@ namespace Homework_12_notMVVM.Model.Workers
             GetClientsPublic();
         }
 
-        public void OpenAccount(Client client, AccountBase account)
+        public void AddAccount(Client client, AccountBase account)
         {
             client.OpenNewAccount(account);
             GetClientsPublic();
             GetAccountsPublic();
         }
 
-        public void CloseAccount(Client client, AccountBase account)
+        public void RemoveAccount(Client client, AccountBase account)
         {
-            client.OpenNewAccount(account);
+            client.RemoveAccount(account);
             GetClientsPublic();
             GetAccountsPublic();
         }

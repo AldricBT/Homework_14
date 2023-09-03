@@ -51,6 +51,12 @@ namespace Homework_12_notMVVM.Model.Data
             _accounts.Add(account);
         }
 
+        public void RemoveAccount(AccountBase account)
+        {
+            StaticMainData.Accounts.Remove(account);
+            _accounts.Remove(account);
+        }
+
         ///// <summary>
         ///// Открытие накопительного счёта
         ///// </summary>
