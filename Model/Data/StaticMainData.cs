@@ -8,11 +8,11 @@ namespace Homework_12_notMVVM.Model.Data
 {
     internal static class StaticMainData
     {
-        private static ClientsData _clients;
-        private static AccountsData _accounts;
+        private static readonly ClientsData _clients;
+        private static readonly AccountsData _accounts;
 
-        private static string _pathToClientsData = "clients.json";
-        private static string _pathToAccountsData= "accounts.json";
+        private static readonly string _pathToClientsData = "clients.json";
+        private static readonly string _pathToAccountsData= "accounts.json";
 
         public static ClientsData Clients
         {

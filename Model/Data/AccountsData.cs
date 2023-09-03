@@ -10,10 +10,11 @@ namespace Homework_12_notMVVM.Model.Data
 {
     internal class AccountsData : DataBase<AccountBase>
     {
+        private readonly string _pathToAccountData;
         public AccountsData(string pathToAccountData) :
             base(pathToAccountData)
         {
-            
+            _pathToAccountData = pathToAccountData;
         }
         /// <summary>
         /// Получает уникальный Id нового счета
@@ -25,5 +26,8 @@ namespace Homework_12_notMVVM.Model.Data
                 return 1;
             return Data.Max(c => c.Id) + 1;
         }
+
+        public override object Clone() => new AccountsData(_pathToAccountData);
+
     }
 }
