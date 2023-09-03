@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Homework_12_notMVVM.Model.Data
 {
-    internal class AccountsData : DataBase<AccountBase>
+    public class AccountsData : DataBase<AccountBase>
     {
         private readonly string _pathToAccountData;
         public AccountsData(string pathToAccountData) :

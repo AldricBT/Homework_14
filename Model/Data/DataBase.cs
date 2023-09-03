@@ -14,7 +14,7 @@ namespace Homework_12_notMVVM.Model.Data
     [JsonDerivedType(typeof(DataBase<AccountsData>), typeDiscriminator: "accounts")]
     //[JsonDerivedType(typeof(ClientsData), typeDiscriminator: "clients")]
     //[JsonDerivedType(typeof(AccountsData), typeDiscriminator: "accounts")]
-    internal abstract class DataBase<T> : ICloneable
+    public abstract class DataBase<T> : ICloneable
         where T : class
     {
         private readonly string _pathToData;

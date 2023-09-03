@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Homework_12_notMVVM.Model.Data
 {
-    internal class ClientsData : DataBase<Client>
+    public class ClientsData : DataBase<Client>
     {            
         private readonly string _pathToData;
 

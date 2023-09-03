@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Homework_12_notMVVM.Model.Data
 {
-    internal class Client
+    public class Client
     {
         private readonly int _id;
         private string _name;

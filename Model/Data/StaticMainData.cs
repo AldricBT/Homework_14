@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace Homework_12_notMVVM.Model.Data
 {
     // Статический класс для хранения данных
-    internal static class StaticMainData
+    public static class StaticMainData
     {
         private static readonly ClientsData _clients;
         private static readonly AccountsData _accounts;

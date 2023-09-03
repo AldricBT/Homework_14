@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Homework_12_notMVVM.Model.Data.Account
 {
-    internal abstract class AccountBase
+    public abstract class AccountBase
     {
         public enum CurrencyEnum
         {

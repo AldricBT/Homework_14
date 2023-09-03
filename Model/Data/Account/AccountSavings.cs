@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Homework_12_notMVVM.Model.Data.Account
 {
-    internal class AccountSavings : AccountBase
+    public class AccountSavings : AccountBase
     {
         private double _rate;
         public double Rate
