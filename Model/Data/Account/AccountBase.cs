@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace Homework_12_notMVVM.Model.Data.Account
@@ -42,7 +43,7 @@ namespace Homework_12_notMVVM.Model.Data.Account
             get => _clientId;
         }
         
-        
+
         public AccountBase(int id, CurrencyEnum currency, int clientId)
         {
             _id = id;
@@ -51,6 +52,7 @@ namespace Homework_12_notMVVM.Model.Data.Account
             _clientId = clientId;
         }
 
+        [JsonConstructor]
         public AccountBase(int id, double money, CurrencyEnum currency, int clientId) //для сериализатора
         {
             _id = id;
@@ -58,6 +60,7 @@ namespace Homework_12_notMVVM.Model.Data.Account
             _currency = currency;
             _clientId = clientId;
         }
+
 
         /// <summary>
         /// Добавить или снять деньги. Нельзя снять больше, чем на счете

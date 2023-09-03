@@ -64,7 +64,7 @@ namespace Homework_12_notMVVM.Model.Data
         {
             string jsonString = File.ReadAllText(_pathToData);
             if (jsonString != null)
-                _dataList = JsonSerializer.Deserialize<ObservableCollection<T>>(jsonString);
+                _dataList = JsonSerializer.Deserialize<ObservableCollection<T>>(jsonString, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
         }
 
         /// <summary>

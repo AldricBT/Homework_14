@@ -10,30 +10,18 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace Homework_12_notMVVM
 {
-    
-    public partial class AuthorizationWindow : Window
+    /// <summary>
+    /// Interaction logic for DataWindow.xaml
+    /// </summary>
+    public partial class DataWindow : Window
     {
-        public AuthorizationWindow()
+        public DataWindow()
         {
             InitializeComponent();
-        }
-
-        private void EntryButton_Click(object sender, RoutedEventArgs e)
-        {
-            switch (ChooseWorker.Text)
-            {
-                case "Менеджер":
-
-                    break;
-
-                default:
-                    break;
-            }
         }
     }
 }

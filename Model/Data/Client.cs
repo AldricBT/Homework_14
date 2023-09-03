@@ -5,6 +5,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Security.Principal;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace Homework_12_notMVVM.Model.Data
@@ -39,6 +40,14 @@ namespace Homework_12_notMVVM.Model.Data
             //При добавлении клиента автоматически открывает ему расчётный счет
             OpenNewAccount(new AccountPayment(StaticMainData.Accounts.GetNewId(),
                 AccountBase.CurrencyEnum.RUR, _id));
+        }
+
+        [JsonConstructor]
+        public Client(int id, string name, List<AccountBase> acc)
+        {
+            _id = id;
+            _name = name;
+            _accounts = acc;            
         }
 
         /// <summary>
