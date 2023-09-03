@@ -5,10 +5,15 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace Homework_12_notMVVM.Model.Data
 {
+    [JsonDerivedType(typeof(DataBase<ClientsData>), typeDiscriminator: "clients")]
+    [JsonDerivedType(typeof(DataBase<AccountsData>), typeDiscriminator: "accounts")]
+    //[JsonDerivedType(typeof(ClientsData), typeDiscriminator: "clients")]
+    //[JsonDerivedType(typeof(AccountsData), typeDiscriminator: "accounts")]
     internal abstract class DataBase<T> : ICloneable
         where T : class
     {
@@ -64,7 +69,8 @@ namespace Homework_12_notMVVM.Model.Data
         {
             string jsonString = File.ReadAllText(_pathToData);
             if (jsonString != null)
-                _dataList = JsonSerializer.Deserialize<ObservableCollection<T>>(jsonString, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+                _dataList = JsonSerializer.Deserialize<ObservableCollection<T>>(jsonString, 
+                    new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
         }
 
         /// <summary>
