@@ -107,13 +107,13 @@
     <Compile Include="View\DataWindow.xaml.cs">
       <DependentUpon>DataWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Model\Data\AccountsData.cs" />
+    <Compile Include="Model\Data\Account\AccountsData.cs" />
     <Compile Include="Model\Data\Account\AccountBase.cs" />
     <Compile Include="Model\Data\Account\AccountPayment.cs" />
     <Compile Include="Model\Data\Account\AccountSavings.cs" />
-    <Compile Include="Model\Data\DataBase.cs" />
-    <Compile Include="Model\Data\Client.cs" />
-    <Compile Include="Model\Data\ClientsData.cs" />
+    <Compile Include="Model\Data\Base\DataBase.cs" />
+    <Compile Include="Model\Data\Client\Client.cs" />
+    <Compile Include="Model\Data\Client\ClientsData.cs" />
     <Compile Include="Model\Data\StaticMainData.cs" />
     <Compile Include="Model\Workers\Consultant.cs" />
     <Compile Include="Model\Workers\Manager.cs" />
