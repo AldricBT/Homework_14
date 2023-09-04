@@ -4,9 +4,18 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Homework_12_notMVVM"
+        xmlns:vm="clr-namespace:Homework_12_notMVVM.ViewModels"
         mc:Ignorable="d"
         Title="DataWindow" Height="450" Width="800">
+    <Window.DataContext>
+        <vm:DataWindowViewModel/>
+    </Window.DataContext>
+    
     <Grid>
+        <StackPanel>
+            <Button x:Name="ExitToAuthorization" Content="Выйти" Width="100" Height="30" Click="ExitToAuthorization_Click" />
+            <TextBlock x:Name="PrintText" />
+        </StackPanel>
         
     </Grid>
 </Window>

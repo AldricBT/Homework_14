@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Homework_12_notMVVM.Model.Workers;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,9 +20,19 @@ namespace Homework_12_notMVVM
     /// </summary>
     public partial class DataWindow : Window
     {
+        internal Worker Worker { get; set; }
+
+
         public DataWindow()
         {
-            InitializeComponent();
+            InitializeComponent();                        
+        }
+
+        private void ExitToAuthorization_Click(object sender, RoutedEventArgs e)
+        {
+            AuthorizationWindow authorizationWindow = new AuthorizationWindow();
+            authorizationWindow.Show();
+            Close();
         }
     }
 }

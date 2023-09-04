@@ -68,6 +68,11 @@ namespace Homework_12_notMVVM.Model.Data
             _accounts.Remove(account);
         }
 
+        public override string ToString()
+        {
+            return $"{Id}: {Name}, numofacc: {Accounts.Count} ";
+        }
+
         ///// <summary>
         ///// Открытие накопительного счёта
         ///// </summary>

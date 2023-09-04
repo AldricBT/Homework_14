@@ -46,9 +46,9 @@ namespace Homework_12_notMVVM
             }
 
             DataWindow dataWindow = new DataWindow();
-            dataWindow.Show();
-            Visibility = Visibility.Hidden;
-            UpdateLayout();
+            dataWindow.Worker = _worker;
+            dataWindow.Show();            
+            Close();            
         }
     }
 }
