@@ -4,9 +4,12 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Homework_12_notMVVM"
+        xmlns:vm="clr-namespace:Homework_12_notMVVM.ViewModels"
         mc:Ignorable="d"
         Title="Окно авторизации" Height="250" Width="420" ResizeMode="NoResize">
-    
+    <Window.DataContext>
+        <vm:AuthorizationWindowViewModel/>
+    </Window.DataContext>
     <Window.Resources>
         <Style x:Key="TextStyle">
             <Setter Property="ItemsControl.FontFamily" Value="Arial" />
