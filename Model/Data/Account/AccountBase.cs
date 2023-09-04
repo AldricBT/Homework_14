@@ -7,6 +7,8 @@ using System.Threading.Tasks;
 
 namespace Homework_12_notMVVM.Model.Data.Account
 {
+    [JsonDerivedType(typeof(AccountPayment), typeDiscriminator: "payments")]
+    [JsonDerivedType(typeof(AccountSavings), typeDiscriminator: "savings")]    
     public abstract class AccountBase
     {
         public enum CurrencyEnum

@@ -9,11 +9,7 @@ using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace Homework_12_notMVVM.Model.Data
-{
-    [JsonDerivedType(typeof(DataBase<ClientsData>), typeDiscriminator: "clients")]
-    [JsonDerivedType(typeof(DataBase<AccountsData>), typeDiscriminator: "accounts")]
-    //[JsonDerivedType(typeof(ClientsData), typeDiscriminator: "clients")]
-    //[JsonDerivedType(typeof(AccountsData), typeDiscriminator: "accounts")]
+{    
     public abstract class DataBase<T> : ICloneable
         where T : class
     {

@@ -12,13 +12,15 @@ namespace Homework_12_notMVVM.Model.Data
 {
     public class Client
     {
-        private readonly int _id;
+        private int _id;
         private string _name;
         private List<AccountBase> _accounts;
 
+        [JsonInclude]
         public int Id 
         {
             get => _id; 
+            private set => _id = value;
         }
 
         public string Name
@@ -27,9 +29,11 @@ namespace Homework_12_notMVVM.Model.Data
             set => _name = value;
         }
 
+        [JsonInclude]
         public List<AccountBase> Accounts
         {
             get => _accounts;
+            private set => _accounts = value;
         }
 
         public Client(int id, string name)
@@ -43,11 +47,9 @@ namespace Homework_12_notMVVM.Model.Data
         }
 
         [JsonConstructor]
-        public Client(int id, string name, List<AccountBase> acc)
+        public Client()
         {
-            _id = id;
-            _name = name;
-            _accounts = acc;            
+                       
         }
 
         /// <summary>
