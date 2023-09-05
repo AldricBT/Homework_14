@@ -12,7 +12,7 @@ using System.Windows.Input;
 
 namespace Homework_12_notMVVM.ViewModels
 {
-    internal class AuthorizationWindowViewModel : ViewModel
+    internal class MainWindowViewModel : ViewModel
     {
         #region Fields and properties
 
@@ -38,38 +38,20 @@ namespace Homework_12_notMVVM.ViewModels
 
         private void OnAuthorizationCommandExecuted(object p) //логика команды
         {
-            switch (SelectedWorker)
-            {
-                case "Менеджер":
-                    StaticMainData.AuthorizedWorker = new Manager();
-                    break;
-
-                default:
-                    StaticMainData.AuthorizedWorker = new Consultant();
-                    break;
-            }
-            
-            DataWindow dataWindow = new DataWindow();
-            dataWindow.Show();
+             
         }
-
         private bool CanAuthorizationCommandExecute(object p) => true; //если команда должна быть доступна всегда, то просто возвращаем true                
         #endregion
 
         #endregion
 
-        //Метод-костыль, для закрытия окна и вызова команды авторизации
-        public void LogIn()
-        {
-            OnAuthorizationCommandExecuted(null);
-        }
-
+        
 
         public void InitializeCommand()
         {
             AuthorizationCommand = new RelayCommand(OnAuthorizationCommandExecuted, CanAuthorizationCommandExecute);
         }
-        public AuthorizationWindowViewModel()
+        public MainWindowViewModel()
         {            
             InitializeCommand();
         }

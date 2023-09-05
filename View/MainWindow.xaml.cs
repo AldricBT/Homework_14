@@ -20,21 +20,11 @@ using System.Windows.Shapes;
 namespace Homework_12_notMVVM
 {
     
-    public partial class AuthorizationWindow : Window
-    {
-        AuthorizationWindowViewModel vm = new AuthorizationWindowViewModel();
-        public AuthorizationWindow()
+    public partial class MainWindow : Window
+    {        
+        public MainWindow()
         {            
             InitializeComponent();
-            this.DataContext = vm;
         }
-
-        
-        private void EntryButton_Click(object sender, RoutedEventArgs e)
-        {
-            vm.LogIn(); //костыль
-            Close();                       
-        }
-
     }
 }

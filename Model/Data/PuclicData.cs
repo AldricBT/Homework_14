@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Homework_12_notMVVM.Model.Workers
 {
-    public abstract class Worker
+    public class PuclicData
     {
         private ClientsData _clientsPublic; //данные отображаемые пользователю
         private AccountsData _accountsPublic; //данные отображаемые пользователю
@@ -23,7 +23,7 @@ namespace Homework_12_notMVVM.Model.Workers
             get => _accountsPublic;
         }
 
-        public Worker()
+        public PuclicData()
         {
             GetClientsPublic();
             GetAccountsPublic();

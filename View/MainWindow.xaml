@@ -1,0 +1,27 @@
+﻿<Window x:Class="Homework_12_notMVVM.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Homework_12_notMVVM"
+        xmlns:vm="clr-namespace:Homework_12_notMVVM.ViewModels" 
+        xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+        mc:Ignorable="d"
+        Title="Счета клиентов" Height="500" Width="1000">
+    <Window.DataContext>
+        <vm:MainWindowViewModel/>
+    </Window.DataContext>
+   
+    <Window.Resources>
+        <Style x:Key="TextStyle">
+            <Setter Property="ItemsControl.FontFamily" Value="Arial" />
+            <Setter Property="ItemsControl.FontSize" Value="20"/>                        
+        </Style>
+    </Window.Resources>
+
+
+    <DockPanel>
+        
+    </DockPanel>
+   
+</Window>

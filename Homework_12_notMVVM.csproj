@@ -86,7 +86,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="View\AuthorizationWindow.xaml">
+    <Page Include="View\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -96,22 +96,14 @@
     </Compile>
     <Compile Include="Infrastructure\Commands\Command.cs" />
     <Compile Include="Infrastructure\Commands\RelayCommand.cs" />
-    <Compile Include="ViewModels\AuthorizationWindowViewModel.cs" />
+    <Compile Include="ViewModels\MainWindowViewModel.cs" />
     <Compile Include="ViewModels\Base\ViewModel.cs" />
-    <Compile Include="ViewModels\DataWindowViewModel.cs" />
-    <Compile Include="View\AuthorizationWindow.xaml.cs">
-      <DependentUpon>AuthorizationWindow.xaml</DependentUpon>
+    <Compile Include="View\MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="View\DataWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="View\DataWindow.xaml.cs">
-      <DependentUpon>DataWindow.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Model\Data\Account\AccountsData.cs" />
     <Compile Include="Model\Data\Account\AccountBase.cs" />
     <Compile Include="Model\Data\Account\AccountPayment.cs" />
@@ -120,9 +112,7 @@
     <Compile Include="Model\Data\Client\Client.cs" />
     <Compile Include="Model\Data\Client\ClientsData.cs" />
     <Compile Include="Model\Data\StaticMainData.cs" />
-    <Compile Include="Model\Workers\Consultant.cs" />
-    <Compile Include="Model\Workers\Manager.cs" />
-    <Compile Include="Model\Workers\Worker.cs" />
+    <Compile Include="Model\Data\PuclicData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
