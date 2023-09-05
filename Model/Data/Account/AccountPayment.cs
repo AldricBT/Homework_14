@@ -9,7 +9,7 @@ namespace Homework_12_notMVVM.Model.Data.Account
     public class AccountPayment : AccountBase
     {
         public AccountPayment(int id, CurrencyEnum currency, int clientId) :
-            base(id, currency, clientId)
+            base(id, currency, clientId, AccountTypeEnum.Расчётный)
         {
             
         }

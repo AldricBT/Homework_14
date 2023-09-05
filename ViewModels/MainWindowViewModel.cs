@@ -1,10 +1,12 @@
 ﻿using Homework_12_notMVVM.Infrastructure.Commands;
 using Homework_12_notMVVM.Model.Data;
+using Homework_12_notMVVM.Model.Data.Account;
 using Homework_12_notMVVM.Model.Workers;
 using Homework_12_notMVVM.ViewModels.Base;
 using System;
 using System.CodeDom;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,31 +18,55 @@ namespace Homework_12_notMVVM.ViewModels
     {
         #region Fields and properties
 
-        #region SelectedWorker
-        private string _selectedWorker;
-
-        /// <summary>
-        /// Выбранный работник. В виде текста textblock
-        /// </summary>
-        public string SelectedWorker
+        #region Clients. База работников
+        public ObservableCollection<Client> Clients
         {
-            get => _selectedWorker;
-            set => Set(ref _selectedWorker, value);
+            get => _clients;
+            set => Set(ref _clients, value);
         }
-
+        private ObservableCollection<Client> _clients;
         #endregion
+        #region SelectedClient. Выбранный работник
+        public Client SelectedClient
+        {
+            get => _selectedClient;
+            set => Set(ref _selectedClient, value);
+        }
+        private Client _selectedClient;
+        #endregion
+
+        #region ClientAccounts. Счета выбранного клиента
+        public ObservableCollection<AccountBase> ClientAccounts
+        {
+            get => _clientAccounts;
+            set => Set(ref _clientAccounts, value);
+        }
+        private ObservableCollection<AccountBase> _clientAccounts;
+        #endregion
+        #region SelectedAccount. Выбранный счёт
+        public AccountBase SelectedAccount
+        {
+            get => _selectedAccount;
+            set => Set(ref _selectedAccount, value);
+        }
+        private AccountBase _selectedAccount;
+        #endregion   
+
         #endregion
 
         #region Commands
 
-        #region AuthorizationCommand
-        public ICommand AuthorizationCommand { get; set; } //здесь живет сама команда (это по сути обычное свойство, чтобы его можно было вызвать из хамл)
+        #region GetAccountCommand 
+        public ICommand GetAccountCommand { get; set; } //здесь живет сама команда (это по сути обычное свойство, чтобы его можно было вызвать из хамл)
 
-        private void OnAuthorizationCommandExecuted(object p) //логика команды
+        private void OnGetAccountCommandExecuted(object p) //логика команды
         {
-             
+            if (SelectedClient != null)
+            {
+                ClientAccounts = StaticMainData.Clients.Data.Where(c => c.Id == SelectedClient.Id).First().Accounts;
+            }
         }
-        private bool CanAuthorizationCommandExecute(object p) => true; //если команда должна быть доступна всегда, то просто возвращаем true                
+        private bool CanGetAccountCommandExecute(object p) => true; //если команда должна быть доступна всегда, то просто возвращаем true                
         #endregion
 
         #endregion
@@ -49,10 +75,11 @@ namespace Homework_12_notMVVM.ViewModels
 
         public void InitializeCommand()
         {
-            AuthorizationCommand = new RelayCommand(OnAuthorizationCommandExecuted, CanAuthorizationCommandExecute);
+            GetAccountCommand = new RelayCommand(OnGetAccountCommandExecuted, CanGetAccountCommandExecute);
         }
         public MainWindowViewModel()
         {            
+            Clients = StaticMainData.Clients.Data;            
             InitializeCommand();
         }
     }

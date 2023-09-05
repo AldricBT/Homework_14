@@ -21,6 +21,33 @@
 
 
     <DockPanel>
+        <!-- Счета -->
+        <DataGrid ItemsSource="{Binding Path=ClientAccounts, UpdateSourceTrigger=PropertyChanged}"  HorizontalAlignment="Left" Margin="20"
+          AutoGenerateColumns="False" CanUserAddRows="False" SelectionMode="Single" DockPanel.Dock="Right" Width="300"
+          SelectedItem="{Binding Path=SelectedAccount, UpdateSourceTrigger=PropertyChanged}">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="ID" Binding="{Binding Path=Id}" IsReadOnly="True" Width="Auto"/>
+                <DataGridTextColumn Header="Тип счёта" Binding="{Binding Path=AccountType, UpdateSourceTrigger=PropertyChanged}" Width="*"/>
+                <DataGridTextColumn Header="Сумма" Binding="{Binding Path=Money, UpdateSourceTrigger=PropertyChanged}" Width="*"/>
+                <DataGridTextColumn Header="Валюта" Binding="{Binding Path=Currency, UpdateSourceTrigger=PropertyChanged}" Width="*"/>
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <!-- Клиенты -->
+        <DataGrid ItemsSource="{Binding Path=Clients, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Margin="20"
+                  AutoGenerateColumns="False" CanUserAddRows="False" SelectionMode="Single" 
+                  SelectedItem="{Binding Path=SelectedClient, UpdateSourceTrigger=PropertyChanged}">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="ID" Binding="{Binding Path=Id}" IsReadOnly="True" Width="Auto"/>
+                <DataGridTextColumn Header="Имя" Binding="{Binding Path=Name, UpdateSourceTrigger=PropertyChanged}" Width="*"/>
+            </DataGrid.Columns>
+            <i:Interaction.Triggers> 
+                <i:EventTrigger EventName="SelectionChanged">
+                    <i:InvokeCommandAction Command="{Binding GetAccountCommand}"/>
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+            
+        </DataGrid>
         
     </DockPanel>
    

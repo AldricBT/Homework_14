@@ -1,4 +1,5 @@
 ﻿using Homework_12_notMVVM.Model.Data.Account;
+using Homework_12_notMVVM.ViewModels.Base;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -10,11 +11,11 @@ using System.Threading.Tasks;
 
 namespace Homework_12_notMVVM.Model.Data
 {
-    public class Client
+    public class Client : ViewModel //чтобы заново не реализовывать INPC
     {
         private int _id;
         private string _name;
-        private List<AccountBase> _accounts;
+        private ObservableCollection<AccountBase> _accounts;
 
         [JsonInclude]
         public int Id 
@@ -30,7 +31,7 @@ namespace Homework_12_notMVVM.Model.Data
         }
 
         [JsonInclude]
-        public List<AccountBase> Accounts
+        public ObservableCollection<AccountBase> Accounts
         {
             get => _accounts;
             private set => _accounts = value;
@@ -40,7 +41,7 @@ namespace Homework_12_notMVVM.Model.Data
         {         
             _id = id;
             _name = name;
-            _accounts = new List<AccountBase>();
+            _accounts = new ObservableCollection<AccountBase>();
             //При добавлении клиента автоматически открывает ему расчётный счет
             OpenNewAccount(new AccountPayment(StaticMainData.Accounts.GetNewId(),
                 AccountBase.CurrencyEnum.RUR, _id));

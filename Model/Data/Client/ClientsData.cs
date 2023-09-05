@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.IO;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
@@ -11,7 +13,7 @@ namespace Homework_12_notMVVM.Model.Data
 {
     public class ClientsData : DataBase<Client>
     {            
-        private readonly string _pathToData;
+        private readonly string _pathToData;        
 
         /// <summary>
         /// Удаление клиента по id
@@ -58,6 +60,6 @@ namespace Homework_12_notMVVM.Model.Data
         }
 
         public override object Clone() => new ClientsData(_pathToData);
-
+                
     }
 }

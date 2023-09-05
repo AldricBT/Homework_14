@@ -19,14 +19,15 @@ namespace Homework_12_notMVVM.Model.Data.Account
         }
         public enum AccountTypeEnum
         {
-            Savings,
-            Payment
+            Накопительный,
+            Расчётный
         }
 
         private readonly int _id;
         private double _money;
         private readonly CurrencyEnum _currency;
         private readonly int _clientId;
+        private readonly AccountTypeEnum _accountType;
 
         public int Id
         {
@@ -44,23 +45,28 @@ namespace Homework_12_notMVVM.Model.Data.Account
         {
             get => _clientId;
         }
-        
+        public AccountTypeEnum AccountType
+        {
+            get => _accountType;
+        }
 
-        public AccountBase(int id, CurrencyEnum currency, int clientId)
+        public AccountBase(int id, CurrencyEnum currency, int clientId, AccountTypeEnum accountType)
         {
             _id = id;
             _money = 0;
             _currency = currency;
             _clientId = clientId;
+            _accountType = accountType;
         }
 
         [JsonConstructor]
-        public AccountBase(int id, double money, CurrencyEnum currency, int clientId) //для сериализатора
+        public AccountBase(int id, double money, CurrencyEnum currency, int clientId, AccountTypeEnum accountType) //для сериализатора
         {
             _id = id;
             _money = money;
             _currency = currency;
             _clientId = clientId;
+            _accountType = accountType;
         }
 
 
