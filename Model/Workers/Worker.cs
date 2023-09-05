@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Homework_12_notMVVM.Model.Workers
 {
-    internal abstract class Worker
+    public abstract class Worker
     {
         private ClientsData _clientsPublic; //данные отображаемые пользователю
         private AccountsData _accountsPublic; //данные отображаемые пользователю
