@@ -1,4 +1,5 @@
-﻿using Homework_12_notMVVM.Model.Workers;
+﻿using Homework_12_notMVVM.Model.Data;
+using Homework_12_notMVVM.Model.Workers;
 using Homework_12_notMVVM.ViewModels.Base;
 using System;
 using System.Collections.Generic;
@@ -13,7 +14,7 @@ namespace Homework_12_notMVVM.ViewModels
         #region Fields and properties
 
         #region Worker
-        private Worker _worker;
+        private Worker _worker = StaticMainData.AuthorizedWorker;
 
         /// <summary>
         /// Выбранный работник. В виде текста textblock

@@ -14,7 +14,7 @@
     <Grid>
         <StackPanel>
             <Button x:Name="ExitToAuthorization" Content="Выйти" Width="100" Height="30" Click="ExitToAuthorization_Click" />
-            <TextBlock x:Name="PrintText" />
+            <TextBlock Text="{Binding Path=SelectedWorker}" />
         </StackPanel>
         
     </Grid>

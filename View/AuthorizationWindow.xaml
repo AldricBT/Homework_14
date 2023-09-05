@@ -4,12 +4,11 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Homework_12_notMVVM"
-        xmlns:vm="clr-namespace:Homework_12_notMVVM.ViewModels"
+        xmlns:vm="clr-namespace:Homework_12_notMVVM.ViewModels" 
+        xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
         mc:Ignorable="d"
         Title="Окно авторизации" Height="250" Width="420" ResizeMode="NoResize">
-    <Window.DataContext>
-        <vm:AuthorizationWindowViewModel/>
-    </Window.DataContext>
+   
     <Window.Resources>
         <Style x:Key="TextStyle">
             <Setter Property="ItemsControl.FontFamily" Value="Arial" />
@@ -20,13 +19,14 @@
     
    <StackPanel Orientation="Vertical" Margin="30">
        <TextBlock Text="Войти как: " Style="{StaticResource TextStyle}" HorizontalAlignment="Center"/>
-        <ComboBox x:Name="ChooseWorker" Width="300" Margin="10" Style="{StaticResource TextStyle}"
-                  SelectedIndex="0">
+        <ComboBox Width="300" Margin="10" Style="{StaticResource TextStyle}"
+                  SelectedIndex="0" SelectedValue="{Binding Path=SelectedWorker, Mode=OneWayToSource}"
+                  SelectedValuePath="Text">
             <TextBlock Text="Консультант"/>
             <TextBlock Text="Менеджер"/>
         </ComboBox>
-        <Button x:Name="EntryButton" Content="Авторизация" Style="{StaticResource TextStyle}" Width="300" Margin="20" 
-                Click="EntryButton_Click"/>
+        <Button Content="Авторизация" Style="{StaticResource TextStyle}" Width="300" Margin="20" Click="EntryButton_Click" />
+
     </StackPanel>
    
 </Window>

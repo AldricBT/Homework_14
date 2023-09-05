@@ -1,6 +1,7 @@
 ﻿using Homework_12_notMVVM.Model;
 using Homework_12_notMVVM.Model.Data;
 using Homework_12_notMVVM.Model.Workers;
+using Homework_12_notMVVM.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,34 +22,19 @@ namespace Homework_12_notMVVM
     
     public partial class AuthorizationWindow : Window
     {
-        private Worker _worker;
-
-        internal Worker Worker
-        {
-            get => _worker;
-        }
+        AuthorizationWindowViewModel vm = new AuthorizationWindowViewModel();
         public AuthorizationWindow()
         {            
-            InitializeComponent();            
+            InitializeComponent();
+            this.DataContext = vm;
         }
 
+        
         private void EntryButton_Click(object sender, RoutedEventArgs e)
         {
-            switch (ChooseWorker.Text)
-            {
-                case "Менеджер":
-                    _worker = new Manager();
-                    break;
-
-                default:
-                    _worker = new Consultant();
-                    break;
-            }
-
-            DataWindow dataWindow = new DataWindow();
-            dataWindow.Worker = _worker;
-            dataWindow.Show();            
-            Close();            
+            vm.LogIn(); //костыль
+            Close();                       
         }
+
     }
 }

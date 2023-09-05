@@ -16,7 +16,12 @@ namespace Homework_12_notMVVM.Model.Data
         private static readonly string _pathToClientsData = "clients.json";
         private static readonly string _pathToAccountsData= "accounts.json";
 
-        public static Worker _authorizedWorker; //авторизированный работник
+        private static Worker _authorizedWorker; //авторизированный работник
+        public static Worker AuthorizedWorker
+        {
+            get => _authorizedWorker;
+            set => _authorizedWorker = value;
+        }
 
         public static ClientsData Clients
         {
