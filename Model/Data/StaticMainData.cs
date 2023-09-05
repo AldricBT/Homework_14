@@ -35,6 +35,12 @@ namespace Homework_12_notMVVM.Model.Data
             get => _pathToAccountsData;
         }
 
+        public static void SaveAllData()
+        {
+            _accounts.Save();
+            _clients.Save();
+        }
+
         static StaticMainData()
         {
             _accounts = new AccountsData(_pathToAccountsData);

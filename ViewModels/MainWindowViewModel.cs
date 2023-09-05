@@ -69,13 +69,32 @@ namespace Homework_12_notMVVM.ViewModels
         private bool CanGetAccountCommandExecute(object p) => true; //если команда должна быть доступна всегда, то просто возвращаем true                
         #endregion
 
+        #region AddAccountCommand 
+        public ICommand AddAccountCommand { get; set; } //здесь живет сама команда (это по сути обычное свойство, чтобы его можно было вызвать из хамл)
+
+        private void OnAddAccountCommandExecuted(object p) //логика команды
+        {
+            SelectedClient.OpenNewAccount(new AccountPayment(StaticMainData.Accounts.GetNewId(),
+                AccountBase.CurrencyEnum.RUR,
+                SelectedClient.Id));
+            StaticMainData.SaveAllData();
+        }
+        private bool CanAddAccountCommandExecute(object p)
+        {
+            if (_selectedClient == null)
+                return false;
+            return true;
+        }
         #endregion
 
-        
+        #endregion 
+
+
 
         public void InitializeCommand()
         {
             GetAccountCommand = new RelayCommand(OnGetAccountCommandExecuted, CanGetAccountCommandExecute);
+            AddAccountCommand = new RelayCommand(OnAddAccountCommandExecuted, CanAddAccountCommandExecute);
         }
         public MainWindowViewModel()
         {            

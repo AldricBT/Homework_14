@@ -13,25 +13,39 @@
     </Window.DataContext>
    
     <Window.Resources>
-        <Style x:Key="TextStyle">
-            <Setter Property="ItemsControl.FontFamily" Value="Arial" />
-            <Setter Property="ItemsControl.FontSize" Value="20"/>                        
+        <Style TargetType="Button">
+            <Setter Property="FontFamily" Value="Arial" />
+            <Setter Property="FontSize" Value="20"/>
+            <Setter Property="Width" Value="130"/>
         </Style>
     </Window.Resources>
 
 
     <DockPanel>
         <!-- Счета -->
-        <DataGrid ItemsSource="{Binding Path=ClientAccounts, UpdateSourceTrigger=PropertyChanged}"  HorizontalAlignment="Left" Margin="20"
-          AutoGenerateColumns="False" CanUserAddRows="False" SelectionMode="Single" DockPanel.Dock="Right" Width="300"
-          SelectedItem="{Binding Path=SelectedAccount, UpdateSourceTrigger=PropertyChanged}">
-            <DataGrid.Columns>
-                <DataGridTextColumn Header="ID" Binding="{Binding Path=Id}" IsReadOnly="True" Width="Auto"/>
-                <DataGridTextColumn Header="Тип счёта" Binding="{Binding Path=AccountType, UpdateSourceTrigger=PropertyChanged}" Width="*"/>
-                <DataGridTextColumn Header="Сумма" Binding="{Binding Path=Money, UpdateSourceTrigger=PropertyChanged}" Width="*"/>
-                <DataGridTextColumn Header="Валюта" Binding="{Binding Path=Currency, UpdateSourceTrigger=PropertyChanged}" Width="*"/>
-            </DataGrid.Columns>
-        </DataGrid>
+        <StackPanel DockPanel.Dock="Right">
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="Счета клиента: "/>
+                <TextBlock Text="{Binding Path=SelectedClient.Name}"/>
+            </StackPanel>
+            
+            <DataGrid ItemsSource="{Binding Path=ClientAccounts, UpdateSourceTrigger=PropertyChanged}"  HorizontalAlignment="Left" Margin="5"
+                      AutoGenerateColumns="False" CanUserAddRows="False" SelectionMode="Single"  Width="500"
+                      SelectedItem="{Binding Path=SelectedAccount, UpdateSourceTrigger=PropertyChanged}">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="ID" Binding="{Binding Path=Id}" IsReadOnly="True" Width="Auto"/>
+                    <DataGridTextColumn Header="Тип счёта" Binding="{Binding Path=AccountType, UpdateSourceTrigger=PropertyChanged}"  
+                                        IsReadOnly="True" Width="*"/>
+                    <DataGridTextColumn Header="Сумма" Binding="{Binding Path=Money, UpdateSourceTrigger=PropertyChanged}"
+                                        IsReadOnly="True" Width="*"/>
+                    <DataGridTextColumn Header="Валюта" Binding="{Binding Path=Currency, UpdateSourceTrigger=PropertyChanged}"  
+                                        IsReadOnly="True" Width="80"/>
+                </DataGrid.Columns>
+            </DataGrid>
+
+            <Button Content="Новый счёт" Command="{Binding AddAccountCommand}"/>
+        </StackPanel>
+        
 
         <!-- Клиенты -->
         <DataGrid ItemsSource="{Binding Path=Clients, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Margin="20"
