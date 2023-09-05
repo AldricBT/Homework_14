@@ -10,12 +10,47 @@
     <Window.DataContext>
         <vm:DataWindowViewModel/>
     </Window.DataContext>
-    
-    <Grid>
-        <StackPanel>
-            <Button x:Name="ExitToAuthorization" Content="Выйти" Width="100" Height="30" Click="ExitToAuthorization_Click" />
-            <TextBlock Text="{Binding Path=SelectedWorker}" />
+
+    <DockPanel>
+        <UniformGrid DockPanel.Dock="Top" Columns="2" Rows="1">
+            <StackPanel HorizontalAlignment="Left" VerticalAlignment="Top">
+                <TextBlock Text="Вы авторизировались как:" Height="20"/>
+                <TextBlock Text="{Binding Path=SelectedWorker}" Height="20" FontStyle="Italic" 
+                                   FontWeight="Bold" FontSize="14"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal"  HorizontalAlignment="Right">
+                <TextBlock Text="Сменить пользователя" VerticalAlignment="Center" />
+                <Button HorizontalAlignment="Right" Margin="5" VerticalAlignment="Center"
+                                Command="{Binding Path=GoToAuthorizationPageCommand}" 
+                                Height="30" Width="30">
+                    <Button.Content>
+                        <fa:ImageAwesome Icon="Solid_ArrowCircleRight" Height="30"/>
+                    </Button.Content>
+                </Button>
+            </StackPanel>
+        </UniformGrid>
+
+        <StackPanel Orientation="Horizontal">
+
+            <DataGrid ItemsSource="{Binding Path=Clients}" Width="600" HorizontalAlignment="Left" Margin="20"
+                              AutoGenerateColumns="False" CanUserAddRows="True" SelectionMode="Single"
+                              SelectedItem="{Binding Path=SelectedItem, UpdateSourceTrigger=PropertyChanged}">                
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="ID" Binding="{Binding Path=Id}" IsReadOnly="True" Width="Auto"/>
+                    <DataGridTextColumn Header="Фамилия" Binding="{Binding Path=Lastname, UpdateSourceTrigger=PropertyChanged}"
+                                                IsReadOnly="{Binding Data.IsFIOReadOnly, Source={StaticResource proxy}}" Width="*"/>
+                    <DataGridTextColumn Header="Имя" Binding="{Binding Path=Name, UpdateSourceTrigger=PropertyChanged}"
+                                                IsReadOnly="{Binding Data.IsFIOReadOnly, Source={StaticResource proxy}}" Width="*"/>
+                    <DataGridTextColumn Header="Отчество" Binding="{Binding Path=Patronymic, UpdateSourceTrigger=PropertyChanged}" 
+                                                IsReadOnly="{Binding Data.IsFIOReadOnly, Source={StaticResource proxy}}" Width="*"/>
+                    <DataGridTextColumn Header="Телефон" Binding="{Binding Path=Phone, UpdateSourceTrigger=PropertyChanged}" 
+                                                IsReadOnly="{Binding Data.IsPhoneReadOnly, Source={StaticResource proxy}}" Width="Auto"/>
+                    <DataGridTextColumn Header="Паспорт" Binding="{Binding Path=Passport, UpdateSourceTrigger=PropertyChanged}" 
+                                                IsReadOnly="{Binding Data.IsFIOReadOnly, Source={StaticResource proxy}}" Width="Auto"/>
+
+                </DataGrid.Columns>
+            </DataGrid>
         </StackPanel>
-        
-    </Grid>
+    </DockPanel>
+    
 </Window>
