@@ -18,6 +18,37 @@ namespace Homework_12_notMVVM.ViewModels
     {
         #region Fields and properties
 
+        #region NewAccountRateInfo. Ставка накопительного счёта              
+        public string NewAccountRateInfo
+        {
+            get => _newAccountRateInfo;
+            private set => Set(ref _newAccountRateInfo, value);
+        }
+        private string _newAccountRateInfo;
+        #endregion
+
+        #region NewAccountMoney. Сумма внесения             
+        public string NewAccountMoney
+        {
+            get => _newAccountMoney;
+            set
+            {                
+                Set(ref _newAccountMoney, value);
+                NewAccountRateInfo = $"{GetRate() * 100}%";
+            }
+        }
+        private string _newAccountMoney;
+        #endregion
+
+        #region NewAccountCurrency. Валюта счёта             
+        public AccountBase.CurrencyEnum NewAccountCurrency
+        {
+            get => _newAccountCurrency;
+            set => Set(ref _newAccountCurrency, value);
+        }
+        private AccountBase.CurrencyEnum _newAccountCurrency;
+        #endregion
+
         #region NewAccountType. Тип счёта             
         public AccountBase.AccountTypeEnum NewAccountType
         {
@@ -25,15 +56,6 @@ namespace Homework_12_notMVVM.ViewModels
             set => Set(ref _newAccountType, value);
         }
         private AccountBase.AccountTypeEnum _newAccountType;
-        #endregion
-
-        #region NewAccountCurrency. Тип счёта             
-        public AccountBase.CurrencyEnum NewAccountCurrency
-        {
-            get => _newAccountCurrency;
-            set => Set(ref _newAccountCurrency, value);
-        }
-        private AccountBase.CurrencyEnum _newAccountCurrency;
         #endregion
 
         #region Clients. База клиентов
@@ -92,14 +114,31 @@ namespace Homework_12_notMVVM.ViewModels
 
         private void OnAddAccountCommandExecuted(object p) //логика команды
         {
-            SelectedClient.OpenNewAccount(new AccountPayment(StaticMainData.Accounts.GetNewId(),
-                AccountBase.CurrencyEnum.RUR,
-                SelectedClient.Id));
+            switch (_newAccountType)
+            {
+                case AccountBase.AccountTypeEnum.Накопительный:
+                    double rate = 0;
+                    if (_newAccountCurrency == AccountBase.CurrencyEnum.RUR)
+                        rate = GetRate();
+                    
+                    SelectedClient.OpenNewAccount(new AccountSavings(StaticMainData.Accounts.GetNewId(),
+                        _newAccountCurrency,
+                        SelectedClient.Id, rate));
+                    break;
+                case AccountBase.AccountTypeEnum.Расчётный:
+                    SelectedClient.OpenNewAccount(new AccountPayment(StaticMainData.Accounts.GetNewId(),
+                        _newAccountCurrency,
+                        SelectedClient.Id));
+                    break;
+                default:
+                    break;
+            }
+            
             StaticMainData.SaveAllData();
         }
         private bool CanAddAccountCommandExecute(object p)
         {
-            if (_selectedClient == null)
+            if (!((int.TryParse(_newAccountMoney, out int result)) && (result >= 0)))
                 return false;
             return true;
         }
@@ -107,6 +146,18 @@ namespace Homework_12_notMVVM.ViewModels
 
         #endregion 
 
+        private double GetRate()
+        {
+            double rate;
+            if ((int.TryParse(_newAccountMoney, out int result)) && (result < 50000))
+                rate = 0.05;
+            else if ((int.TryParse(_newAccountMoney, out result)) && (result < 100000))
+                rate = 0.07;
+            else
+                rate = 0.09;
+
+            return rate;
+        }
 
 
         public void InitializeCommand()

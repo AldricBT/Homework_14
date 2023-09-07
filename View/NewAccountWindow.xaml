@@ -12,14 +12,14 @@
     </Window.DataContext>
     <DockPanel>
         <UniformGrid DockPanel.Dock="Bottom" Rows="1" Columns="2">
-            <Button Height="30" Width="100" Margin="10"  Content="Открыть счёт"/>
+            <Button Height="30" Width="100" Margin="10"  Content="Открыть счёт" Command="{Binding Path=AddAccountCommand}"/>
             <Button Height="30" Width="100" Margin="10" Content="Отмена"/>
         </UniformGrid>
-        <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" Margin="20">
+        <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" Margin="5">
             <TextBlock Text="Открытие счета для: "/>
             <TextBlock Text="{Binding Path=SelectedClient.Name}"/>
         </StackPanel>
-        <Grid Margin="20">
+        <Grid Margin="5">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition/>
@@ -27,20 +27,31 @@
             <Grid.RowDefinitions>
                 <RowDefinition/>
                 <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
             </Grid.RowDefinitions>
+            
             <TextBlock Text="Тип счёта:" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Column="0" Grid.Row="0"/>
-            <ComboBox Margin="5" Grid.Column="1" Grid.Row="0" SelectedIndex="0" SelectedValuePath="Text"
+            <ComboBox Margin="2" Grid.Column="1" Grid.Row="0" SelectedIndex="0" SelectedValuePath="Text"
                       SelectedValue="{Binding Path=NewAccountType}" VerticalAlignment="Center">
                 <TextBlock Text="Расчётный"/>
                 <TextBlock Text="Накопительный"/>
             </ComboBox>
+            
             <TextBlock Text="Валюта счёта:" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Column="0" Grid.Row="1"/>
-            <ComboBox Margin="5" Grid.Column="1" Grid.Row="1" SelectedIndex="0" SelectedValuePath="Text"
+            <ComboBox Margin="2" Grid.Column="1" Grid.Row="1" SelectedIndex="0" SelectedValuePath="Text"
                       SelectedValue="{Binding Path=NewAccountCurrency}" VerticalAlignment="Center">
                 <TextBlock Text="RUR"/>
                 <TextBlock Text="USD"/>
                 <TextBlock Text="EUR"/>
             </ComboBox>
+
+            <TextBlock Text="Вносимая сумма:" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Column="0" Grid.Row="2"/>
+            <TextBox Text="{Binding Path=NewAccountMoney, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" Grid.Column="1" Grid.Row="2" Margin="2" HorizontalAlignment="Stretch"/>
+
+            <TextBlock Text="Ваша ставка:" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Column="0" Grid.Row="3"/>
+            <TextBlock Text ="{Binding Path=NewAccountRateInfo, Mode=OneWay}" VerticalAlignment="Center" 
+                       Grid.Column="1" Grid.Row="3" Margin="2" HorizontalAlignment="Left"/>
         </Grid>
         
     </DockPanel>
