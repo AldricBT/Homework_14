@@ -29,9 +29,18 @@
                 <RowDefinition/>
             </Grid.RowDefinitions>
             <TextBlock Text="Тип счёта:" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Column="0" Grid.Row="0"/>
-            <ComboBox ItemsSource="{Binding Path=NewAccountType}" Margin="5" Grid.Column="1" Grid.Row="0"/>
+            <ComboBox Margin="5" Grid.Column="1" Grid.Row="0" SelectedIndex="0" SelectedValuePath="Text"
+                      SelectedValue="{Binding Path=NewAccountType}" VerticalAlignment="Center">
+                <TextBlock Text="Расчётный"/>
+                <TextBlock Text="Накопительный"/>
+            </ComboBox>
             <TextBlock Text="Валюта счёта:" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Column="0" Grid.Row="1"/>
-            <ComboBox ItemsSource="{Binding Path=NewAccountCurrency}" Margin="5" Grid.Column="1" Grid.Row="1"/>
+            <ComboBox Margin="5" Grid.Column="1" Grid.Row="1" SelectedIndex="0" SelectedValuePath="Text"
+                      SelectedValue="{Binding Path=NewAccountCurrency}" VerticalAlignment="Center">
+                <TextBlock Text="RUR"/>
+                <TextBlock Text="USD"/>
+                <TextBlock Text="EUR"/>
+            </ComboBox>
         </Grid>
         
     </DockPanel>

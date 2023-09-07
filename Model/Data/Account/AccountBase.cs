@@ -19,11 +19,9 @@ namespace Homework_12_notMVVM.Model.Data.Account
             RUR
         }
         public enum AccountTypeEnum
-        {
-            [Description("Накопительный")]
-            Savings,
-            [Description("Расчётный")]
-            Payment
+        {            
+            Накопительный,            
+            Расчётный
         }
 
         private readonly int _id;
