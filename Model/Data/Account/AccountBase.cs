@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Text.Json.Serialization;
@@ -19,8 +20,10 @@ namespace Homework_12_notMVVM.Model.Data.Account
         }
         public enum AccountTypeEnum
         {
-            Накопительный,
-            Расчётный
+            [Description("Накопительный")]
+            Savings,
+            [Description("Расчётный")]
+            Payment
         }
 
         private readonly int _id;

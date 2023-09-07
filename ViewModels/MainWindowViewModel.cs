@@ -18,7 +18,25 @@ namespace Homework_12_notMVVM.ViewModels
     {
         #region Fields and properties
 
-        #region Clients. База работников
+        #region NewAccountType. Тип счёта             
+        public AccountBase.AccountTypeEnum NewAccountType
+        {
+            get => _newAccountType;
+            set => Set(ref _newAccountType, value);
+        }
+        private AccountBase.AccountTypeEnum _newAccountType;
+        #endregion
+
+        #region NewAccountCurrency. Тип счёта             
+        public AccountBase.CurrencyEnum NewAccountCurrency
+        {
+            get => _newAccountCurrency;
+            set => Set(ref _newAccountCurrency, value);
+        }
+        private AccountBase.CurrencyEnum _newAccountCurrency;
+        #endregion
+
+        #region Clients. База клиентов
         public ObservableCollection<Client> Clients
         {
             get => _clients;
@@ -26,7 +44,7 @@ namespace Homework_12_notMVVM.ViewModels
         }
         private ObservableCollection<Client> _clients;
         #endregion
-        #region SelectedClient. Выбранный работник
+        #region SelectedClient. Выбранный клиент
         public Client SelectedClient
         {
             get => _selectedClient;
@@ -99,7 +117,7 @@ namespace Homework_12_notMVVM.ViewModels
         public MainWindowViewModel()
         {            
             Clients = StaticMainData.Clients.Data;            
-            InitializeCommand();
+            InitializeCommand();            
         }
     }
 }

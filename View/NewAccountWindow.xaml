@@ -4,9 +4,37 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Homework_12_notMVVM.View"
+        xmlns:vm="clr-namespace:Homework_12_notMVVM.ViewModels"
         mc:Ignorable="d"
-        Title="Открытие нового счёта" Height="450" Width="800">
-    <Grid>
+        Title="Открытие нового счёта" Height="250" Width="300">
+    <Window.DataContext>
+        <vm:MainWindowViewModel/>
+    </Window.DataContext>
+    <DockPanel>
+        <UniformGrid DockPanel.Dock="Bottom" Rows="1" Columns="2">
+            <Button Height="30" Width="100" Margin="10"  Content="Открыть счёт"/>
+            <Button Height="30" Width="100" Margin="10" Content="Отмена"/>
+        </UniformGrid>
+        <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" Margin="20">
+            <TextBlock Text="Открытие счета для: "/>
+            <TextBlock Text="{Binding Path=SelectedClient.Name}"/>
+        </StackPanel>
+        <Grid Margin="20">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <TextBlock Text="Тип счёта:" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Column="0" Grid.Row="0"/>
+            <ComboBox ItemsSource="{Binding Path=NewAccountType}" Margin="5" Grid.Column="1" Grid.Row="0"/>
+            <TextBlock Text="Валюта счёта:" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Column="0" Grid.Row="1"/>
+            <ComboBox ItemsSource="{Binding Path=NewAccountCurrency}" Margin="5" Grid.Column="1" Grid.Row="1"/>
+        </Grid>
         
-    </Grid>
+    </DockPanel>
+    
+    
 </Window>
