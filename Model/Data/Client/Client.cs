@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace Homework_12_notMVVM.Model.Data
 {
-    public class Client : ViewModel //чтобы заново не реализовывать INPC
+    public class Client : ViewModel, ICloneable //чтобы заново не реализовывать INPC
     {
         private int _id;
         private string _name;
@@ -48,9 +48,11 @@ namespace Homework_12_notMVVM.Model.Data
         }
 
         [JsonConstructor]
-        public Client()
+        public Client(int id, string name, ObservableCollection<AccountBase> accounts)
         {
-                       
+            _id = id;
+            _name = name;
+            _accounts = accounts;
         }
 
         /// <summary>
@@ -72,6 +74,11 @@ namespace Homework_12_notMVVM.Model.Data
         public override string ToString()
         {
             return $"{Id}: {Name}, numofacc: {Accounts.Count} ";
+        }
+
+        public object Clone()
+        {
+            return new Client(this._id, this._name, this._accounts);
         }
 
         ///// <summary>

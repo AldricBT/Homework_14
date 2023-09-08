@@ -19,7 +19,7 @@ namespace Homework_12_notMVVM.View
     {
         public NewAccountWindow()
         {
-            this.InitializeComponent();
+            InitializeComponent();
         }
     }
 }

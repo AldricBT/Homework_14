@@ -19,11 +19,8 @@ namespace Homework_12_notMVVM.ViewModels
     internal class MainWindowViewModel : ViewModel
     {
         private NewAccountWindow _newAccountWindow; //диалоговое окно открытия нового счёта
-        public NewAccountWindow NewAccountWindowObject
-        {
-            get => _newAccountWindow;
-            set => _newAccountWindow = value;
-        }
+
+        private Client _rememberSelectedClient; //запоминание выбранного клиента при открытии нового счёта
 
         #region Fields and properties
 
@@ -148,14 +145,14 @@ namespace Homework_12_notMVVM.ViewModels
                     if (_newAccountCurrency == AccountBase.CurrencyEnum.RUR)
                         rate = GetRate();
 
-                    SelectedClient.OpenNewAccount(new AccountSavings(StaticMainData.Accounts.GetNewId(),
+                    _rememberSelectedClient.OpenNewAccount(new AccountSavings(StaticMainData.Accounts.GetNewId(),
                         _newAccountCurrency,
-                        SelectedClient.Id, rate));
+                        _rememberSelectedClient.Id, rate));
                     break;
                 case AccountBase.AccountTypeEnum.Расчётный:
-                    SelectedClient.OpenNewAccount(new AccountPayment(StaticMainData.Accounts.GetNewId(),
+                    _rememberSelectedClient.OpenNewAccount(new AccountPayment(StaticMainData.Accounts.GetNewId(),
                         _newAccountCurrency,
-                        SelectedClient.Id));
+                        _rememberSelectedClient.Id));
                     break;
                 default:
                     break;
@@ -181,6 +178,7 @@ namespace Homework_12_notMVVM.ViewModels
             if (SelectedClient != null)
             {
                 ClientAccounts = StaticMainData.Clients.Data.Where(c => c.Id == SelectedClient.Id).First().Accounts;
+                _rememberSelectedClient = (Client)SelectedClient.Clone();
             }
         }
         private bool CanGetAccountCommandExecute(object p) => true; //если команда должна быть доступна всегда, то просто возвращаем true                
@@ -190,7 +188,8 @@ namespace Homework_12_notMVVM.ViewModels
         public ICommand AddAccountMainCommand { get; set; } //здесь живет сама команда (это по сути обычное свойство, чтобы его можно было вызвать из хамл)
 
         private void OnAddAccountMainCommandExecuted(object p) //логика команды
-        {            
+        {
+            _newAccountWindow = new NewAccountWindow();
             _newAccountWindow.ShowDialog();
         }
         private bool CanAddAccountMainCommandExecute(object p)
@@ -237,7 +236,7 @@ namespace Homework_12_notMVVM.ViewModels
 
         public MainWindowViewModel()
         {            
-            Clients = StaticMainData.Clients.Data;
+            Clients = StaticMainData.Clients.Data;            
             _newAccountControlsView = Visibility.Hidden;
             _newAccountMoney = "0";
             InitializeCommand();            
