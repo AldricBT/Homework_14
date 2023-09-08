@@ -10,6 +10,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 
 namespace Homework_12_notMVVM.ViewModels
@@ -17,6 +18,16 @@ namespace Homework_12_notMVVM.ViewModels
     internal class MainWindowViewModel : ViewModel
     {
         #region Fields and properties
+
+        #region NewAccountDialog. Свойства в модальном окне открытия нового счета
+        #region NewAccountControlsView. Доступные контролы (внесение денег, ставка) в зависимости от типа счёта
+        public Visibility NewAccountControlsView
+        {
+            get => _newAccountControlsView;
+            private set => Set(ref _newAccountControlsView, value);
+        }
+        private Visibility _newAccountControlsView = Visibility.Hidden;
+        #endregion
 
         #region NewAccountRateInfo. Ставка накопительного счёта              
         public string NewAccountRateInfo
@@ -27,7 +38,7 @@ namespace Homework_12_notMVVM.ViewModels
         private string _newAccountRateInfo;
         #endregion
 
-        #region NewAccountMoney. Сумма внесения             
+        #region NewAccountMoney. Сумма внесения            
         public string NewAccountMoney
         {
             get => _newAccountMoney;
@@ -37,7 +48,7 @@ namespace Homework_12_notMVVM.ViewModels
                 NewAccountRateInfo = $"{GetRate() * 100}%";
             }
         }
-        private string _newAccountMoney;
+        private string _newAccountMoney = "0";
         #endregion
 
         #region NewAccountCurrency. Валюта счёта             
@@ -56,6 +67,7 @@ namespace Homework_12_notMVVM.ViewModels
             set => Set(ref _newAccountType, value);
         }
         private AccountBase.AccountTypeEnum _newAccountType;
+        #endregion
         #endregion
 
         #region Clients. База клиентов
@@ -90,26 +102,32 @@ namespace Homework_12_notMVVM.ViewModels
             set => Set(ref _selectedAccount, value);
         }
         private AccountBase _selectedAccount;
-        #endregion   
+        #endregion
 
         #endregion
 
-        #region Commands
 
-        #region GetAccountCommand 
-        public ICommand GetAccountCommand { get; set; } //здесь живет сама команда (это по сути обычное свойство, чтобы его можно было вызвать из хамл)
 
-        private void OnGetAccountCommandExecuted(object p) //логика команды
+
+
+
+
+        #region Commands 
+
+        #region Команды в диалоге добавления нового счёта
+        #region NewAccountTypeChangedCommand. Видимость дополнительных контролов при смене типа счёта. В диалоге
+        public ICommand NewAccountTypeChangedCommand { get; set; } //здесь живет сама команда (это по сути обычное свойство, чтобы его можно было вызвать из хамл)
+
+        private void OnNewAccountTypeChangedCommandExecuted(object p) //логика команды
         {
-            if (SelectedClient != null)
-            {
-                ClientAccounts = StaticMainData.Clients.Data.Where(c => c.Id == SelectedClient.Id).First().Accounts;
-            }
+            if (_newAccountType == AccountBase.AccountTypeEnum.Накопительный)
+                NewAccountControlsView = Visibility.Visible;            
+            else
+                NewAccountControlsView = Visibility.Hidden;
         }
-        private bool CanGetAccountCommandExecute(object p) => true; //если команда должна быть доступна всегда, то просто возвращаем true                
+        private bool CanNewAccountTypeChangedCommandExecute(object p) => true; //если команда должна быть доступна всегда, то просто возвращаем true                
         #endregion
-
-        #region AddAccountCommand 
+        #region AddAccountCommand. Команда добавления нового счёта. В диалоге 
         public ICommand AddAccountCommand { get; set; } //здесь живет сама команда (это по сути обычное свойство, чтобы его можно было вызвать из хамл)
 
         private void OnAddAccountCommandExecuted(object p) //логика команды
@@ -120,7 +138,7 @@ namespace Homework_12_notMVVM.ViewModels
                     double rate = 0;
                     if (_newAccountCurrency == AccountBase.CurrencyEnum.RUR)
                         rate = GetRate();
-                    
+
                     SelectedClient.OpenNewAccount(new AccountSavings(StaticMainData.Accounts.GetNewId(),
                         _newAccountCurrency,
                         SelectedClient.Id, rate));
@@ -133,7 +151,7 @@ namespace Homework_12_notMVVM.ViewModels
                 default:
                     break;
             }
-            
+
             StaticMainData.SaveAllData();
         }
         private bool CanAddAccountCommandExecute(object p)
@@ -143,9 +161,29 @@ namespace Homework_12_notMVVM.ViewModels
             return true;
         }
         #endregion
+        #endregion 
+
+        #region GetAccountCommand. При выборе клиента показывает его счета
+        public ICommand GetAccountCommand { get; set; } //здесь живет сама команда (это по сути обычное свойство, чтобы его можно было вызвать из хамл)
+
+        private void OnGetAccountCommandExecuted(object p) //логика команды
+        {
+            if (SelectedClient != null)
+            {
+                ClientAccounts = StaticMainData.Clients.Data.Where(c => c.Id == SelectedClient.Id).First().Accounts;
+            }
+        }
+        private bool CanGetAccountCommandExecute(object p) => true; //если команда должна быть доступна всегда, то просто возвращаем true                
+        #endregion
+
+        
 
         #endregion 
 
+        /// <summary>
+        /// Устанавливает накопительную ставку для нового накопительного счёта при внесении определенной суммы
+        /// </summary>
+        /// <returns>Ставка накопительного счёта</returns>
         private double GetRate()
         {
             double rate;
@@ -160,8 +198,12 @@ namespace Homework_12_notMVVM.ViewModels
         }
 
 
-        public void InitializeCommand()
+        /// <summary>
+        /// Инициализирует команды
+        /// </summary>
+        private void InitializeCommand() 
         {
+            NewAccountTypeChangedCommand = new RelayCommand(OnNewAccountTypeChangedCommandExecuted, CanNewAccountTypeChangedCommandExecute);
             GetAccountCommand = new RelayCommand(OnGetAccountCommandExecuted, CanGetAccountCommandExecute);
             AddAccountCommand = new RelayCommand(OnAddAccountCommandExecuted, CanAddAccountCommandExecute);
         }

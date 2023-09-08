@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Homework_12_notMVVM.View"
-        xmlns:vm="clr-namespace:Homework_12_notMVVM.ViewModels"
+        xmlns:vm="clr-namespace:Homework_12_notMVVM.ViewModels" xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
         mc:Ignorable="d"
         Title="Открытие нового счёта" Height="250" Width="300">
     <Window.DataContext>
@@ -36,6 +36,12 @@
                       SelectedValue="{Binding Path=NewAccountType}" VerticalAlignment="Center">
                 <TextBlock Text="Расчётный"/>
                 <TextBlock Text="Накопительный"/>
+
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="SelectionChanged">
+                        <i:InvokeCommandAction Command="{Binding NewAccountTypeChangedCommand}"/>
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
             </ComboBox>
             
             <TextBlock Text="Валюта счёта:" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Column="0" Grid.Row="1"/>
@@ -46,12 +52,15 @@
                 <TextBlock Text="EUR"/>
             </ComboBox>
 
-            <TextBlock Text="Вносимая сумма:" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Column="0" Grid.Row="2"/>
-            <TextBox Text="{Binding Path=NewAccountMoney, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" Grid.Column="1" Grid.Row="2" Margin="2" HorizontalAlignment="Stretch"/>
+            <TextBlock Text="Вносимая сумма:" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Column="0" Grid.Row="2"
+                       Visibility="{Binding Path=NewAccountControlsView}"/>
+            <TextBox Text="{Binding Path=NewAccountMoney, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" Grid.Column="1" Grid.Row="2" 
+                     Margin="2" HorizontalAlignment="Stretch" Visibility="{Binding Path=NewAccountControlsView}"/>
 
-            <TextBlock Text="Ваша ставка:" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Column="0" Grid.Row="3"/>
+            <TextBlock Text="Ваша ставка:" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Column="0" Grid.Row="3"
+                       Visibility="{Binding Path=NewAccountControlsView}"/>
             <TextBlock Text ="{Binding Path=NewAccountRateInfo, Mode=OneWay}" VerticalAlignment="Center" 
-                       Grid.Column="1" Grid.Row="3" Margin="2" HorizontalAlignment="Left"/>
+                       Grid.Column="1" Grid.Row="3" Margin="2" HorizontalAlignment="Left" Visibility="{Binding Path=NewAccountControlsView}"/>
         </Grid>
         
     </DockPanel>
