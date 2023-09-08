@@ -14,14 +14,12 @@ using System.Windows.Shapes;
 
 namespace Homework_12_notMVVM.View
 {
-    /// <summary>
-    /// Interaction logic for NewAccountWindow.xaml
-    /// </summary>
+    
     public partial class NewAccountWindow : Window
     {
         public NewAccountWindow()
         {
-            InitializeComponent();
+            this.InitializeComponent();
         }
     }
 }

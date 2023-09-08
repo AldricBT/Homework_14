@@ -2,6 +2,7 @@
 using Homework_12_notMVVM.Model.Data;
 using Homework_12_notMVVM.Model.Data.Account;
 using Homework_12_notMVVM.Model.Workers;
+using Homework_12_notMVVM.View;
 using Homework_12_notMVVM.ViewModels.Base;
 using System;
 using System.CodeDom;
@@ -17,6 +18,13 @@ namespace Homework_12_notMVVM.ViewModels
 {
     internal class MainWindowViewModel : ViewModel
     {
+        private NewAccountWindow _newAccountWindow; //диалоговое окно открытия нового счёта
+        public NewAccountWindow NewAccountWindowObject
+        {
+            get => _newAccountWindow;
+            set => _newAccountWindow = value;
+        }
+
         #region Fields and properties
 
         #region NewAccountDialog. Свойства в модальном окне открытия нового счета
@@ -26,7 +34,7 @@ namespace Homework_12_notMVVM.ViewModels
             get => _newAccountControlsView;
             private set => Set(ref _newAccountControlsView, value);
         }
-        private Visibility _newAccountControlsView = Visibility.Hidden;
+        private Visibility _newAccountControlsView;
         #endregion
 
         #region NewAccountRateInfo. Ставка накопительного счёта              
@@ -48,7 +56,7 @@ namespace Homework_12_notMVVM.ViewModels
                 NewAccountRateInfo = $"{GetRate() * 100}%";
             }
         }
-        private string _newAccountMoney = "0";
+        private string _newAccountMoney;
         #endregion
 
         #region NewAccountCurrency. Валюта счёта             
@@ -127,10 +135,11 @@ namespace Homework_12_notMVVM.ViewModels
         }
         private bool CanNewAccountTypeChangedCommandExecute(object p) => true; //если команда должна быть доступна всегда, то просто возвращаем true                
         #endregion
-        #region AddAccountCommand. Команда добавления нового счёта. В диалоге 
-        public ICommand AddAccountCommand { get; set; } //здесь живет сама команда (это по сути обычное свойство, чтобы его можно было вызвать из хамл)
 
-        private void OnAddAccountCommandExecuted(object p) //логика команды
+        #region AddAccountDialogCommand. Команда добавления нового счёта. В диалоге 
+        public ICommand AddAccountDialogCommand { get; set; } //здесь живет сама команда (это по сути обычное свойство, чтобы его можно было вызвать из хамл)
+
+        private void OnAddAccountDialogCommandExecuted(object p) //логика команды
         {
             switch (_newAccountType)
             {
@@ -151,10 +160,11 @@ namespace Homework_12_notMVVM.ViewModels
                 default:
                     break;
             }
-
+            
             StaticMainData.SaveAllData();
+            _newAccountWindow.DialogResult = true;
         }
-        private bool CanAddAccountCommandExecute(object p)
+        private bool CanAddAccountDialogCommandExecute(object p)
         {
             if (!((int.TryParse(_newAccountMoney, out int result)) && (result >= 0)))
                 return false;
@@ -176,10 +186,25 @@ namespace Homework_12_notMVVM.ViewModels
         private bool CanGetAccountCommandExecute(object p) => true; //если команда должна быть доступна всегда, то просто возвращаем true                
         #endregion
 
-        
+        #region AddAccountMainCommand. Команда добавления нового счёта в главном окне. для открытия диалога
+        public ICommand AddAccountMainCommand { get; set; } //здесь живет сама команда (это по сути обычное свойство, чтобы его можно было вызвать из хамл)
 
-        #endregion 
+        private void OnAddAccountMainCommandExecuted(object p) //логика команды
+        {            
+            _newAccountWindow.ShowDialog();
+        }
+        private bool CanAddAccountMainCommandExecute(object p)
+        {
+            if (_selectedClient is null)
+                return false;
+            return true;
+        }
+        #endregion
 
+        #endregion
+
+
+        #region Приватные методы VM
         /// <summary>
         /// Устанавливает накопительную ставку для нового накопительного счёта при внесении определенной суммы
         /// </summary>
@@ -205,11 +230,16 @@ namespace Homework_12_notMVVM.ViewModels
         {
             NewAccountTypeChangedCommand = new RelayCommand(OnNewAccountTypeChangedCommandExecuted, CanNewAccountTypeChangedCommandExecute);
             GetAccountCommand = new RelayCommand(OnGetAccountCommandExecuted, CanGetAccountCommandExecute);
-            AddAccountCommand = new RelayCommand(OnAddAccountCommandExecuted, CanAddAccountCommandExecute);
+            AddAccountMainCommand = new RelayCommand(OnAddAccountMainCommandExecuted, CanAddAccountMainCommandExecute);
+            AddAccountDialogCommand = new RelayCommand(OnAddAccountDialogCommandExecuted, CanAddAccountDialogCommandExecute);
         }
+        #endregion 
+
         public MainWindowViewModel()
         {            
-            Clients = StaticMainData.Clients.Data;            
+            Clients = StaticMainData.Clients.Data;
+            _newAccountControlsView = Visibility.Hidden;
+            _newAccountMoney = "0";
             InitializeCommand();            
         }
     }

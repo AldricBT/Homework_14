@@ -8,9 +8,6 @@
         xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
         mc:Ignorable="d"
         Title="Счета клиентов" Height="500" Width="1000">
-    <Window.DataContext>
-        <vm:MainWindowViewModel/>
-    </Window.DataContext>
    
     <Window.Resources>
         <Style TargetType="Button">
@@ -43,7 +40,7 @@
                 </DataGrid.Columns>
             </DataGrid>
 
-            <Button Content="Новый счёт" Command="{Binding AddAccountCommand}"/>
+            <Button Content="Новый счёт" Command="{Binding AddAccountMainCommand}"/>
         </StackPanel>
         
 

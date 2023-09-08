@@ -4,16 +4,15 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Homework_12_notMVVM.View"
-        xmlns:vm="clr-namespace:Homework_12_notMVVM.ViewModels" xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+        xmlns:vm="clr-namespace:Homework_12_notMVVM.ViewModels" 
+        xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
         mc:Ignorable="d"
-        Title="Открытие нового счёта" Height="250" Width="300">
-    <Window.DataContext>
-        <vm:MainWindowViewModel/>
-    </Window.DataContext>
+        Title="Открытие нового счёта" Height="250" Width="300">   
     <DockPanel>
         <UniformGrid DockPanel.Dock="Bottom" Rows="1" Columns="2">
-            <Button Height="30" Width="100" Margin="10"  Content="Открыть счёт" Command="{Binding Path=AddAccountCommand}"/>
-            <Button Height="30" Width="100" Margin="10" Content="Отмена"/>
+            <Button Height="30" Width="100" Margin="10"  Content="Открыть счёт" Command="{Binding Path=AddAccountDialogCommand}" 
+                    IsDefault="True"/>
+            <Button Height="30" Width="100" Margin="10" Content="Отмена" IsCancel="True"/>
         </UniformGrid>
         <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" Margin="5">
             <TextBlock Text="Открытие счета для: "/>
