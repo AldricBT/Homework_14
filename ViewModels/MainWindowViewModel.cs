@@ -17,63 +17,13 @@ using System.Windows.Input;
 namespace Homework_12_notMVVM.ViewModels
 {
     internal class MainWindowViewModel : ViewModel
-    {
-        private NewAccountWindow _newAccountWindow; //диалоговое окно открытия нового счёта
+    {       
 
         private Client _rememberSelectedClient; //запоминание выбранного клиента при открытии нового счёта
 
         #region Fields and properties
 
-        #region NewAccountDialog. Свойства в модальном окне открытия нового счета
-        #region NewAccountControlsView. Доступные контролы (внесение денег, ставка) в зависимости от типа счёта
-        public Visibility NewAccountControlsView
-        {
-            get => _newAccountControlsView;
-            private set => Set(ref _newAccountControlsView, value);
-        }
-        private Visibility _newAccountControlsView;
-        #endregion
-
-        #region NewAccountRateInfo. Ставка накопительного счёта              
-        public string NewAccountRateInfo
-        {
-            get => _newAccountRateInfo;
-            private set => Set(ref _newAccountRateInfo, value);
-        }
-        private string _newAccountRateInfo;
-        #endregion
-
-        #region NewAccountMoney. Сумма внесения            
-        public string NewAccountMoney
-        {
-            get => _newAccountMoney;
-            set
-            {                
-                Set(ref _newAccountMoney, value);
-                NewAccountRateInfo = $"{GetRate() * 100}%";
-            }
-        }
-        private string _newAccountMoney;
-        #endregion
-
-        #region NewAccountCurrency. Валюта счёта             
-        public AccountBase.CurrencyEnum NewAccountCurrency
-        {
-            get => _newAccountCurrency;
-            set => Set(ref _newAccountCurrency, value);
-        }
-        private AccountBase.CurrencyEnum _newAccountCurrency;
-        #endregion
-
-        #region NewAccountType. Тип счёта             
-        public AccountBase.AccountTypeEnum NewAccountType
-        {
-            get => _newAccountType;
-            set => Set(ref _newAccountType, value);
-        }
-        private AccountBase.AccountTypeEnum _newAccountType;
-        #endregion
-        #endregion
+        
 
         #region Clients. База клиентов
         public ObservableCollection<Client> Clients
@@ -119,56 +69,7 @@ namespace Homework_12_notMVVM.ViewModels
 
         #region Commands 
 
-        #region Команды в диалоге добавления нового счёта
-        #region NewAccountTypeChangedCommand. Видимость дополнительных контролов при смене типа счёта. В диалоге
-        public ICommand NewAccountTypeChangedCommand { get; set; } //здесь живет сама команда (это по сути обычное свойство, чтобы его можно было вызвать из хамл)
-
-        private void OnNewAccountTypeChangedCommandExecuted(object p) //логика команды
-        {
-            if (_newAccountType == AccountBase.AccountTypeEnum.Накопительный)
-                NewAccountControlsView = Visibility.Visible;            
-            else
-                NewAccountControlsView = Visibility.Hidden;
-        }
-        private bool CanNewAccountTypeChangedCommandExecute(object p) => true; //если команда должна быть доступна всегда, то просто возвращаем true                
-        #endregion
-
-        #region AddAccountDialogCommand. Команда добавления нового счёта. В диалоге 
-        public ICommand AddAccountDialogCommand { get; set; } //здесь живет сама команда (это по сути обычное свойство, чтобы его можно было вызвать из хамл)
-
-        private void OnAddAccountDialogCommandExecuted(object p) //логика команды
-        {
-            switch (_newAccountType)
-            {
-                case AccountBase.AccountTypeEnum.Накопительный:
-                    double rate = 0;
-                    if (_newAccountCurrency == AccountBase.CurrencyEnum.RUR)
-                        rate = GetRate();
-
-                    _rememberSelectedClient.OpenNewAccount(new AccountSavings(StaticMainData.Accounts.GetNewId(),
-                        _newAccountCurrency,
-                        _rememberSelectedClient.Id, rate));
-                    break;
-                case AccountBase.AccountTypeEnum.Расчётный:
-                    _rememberSelectedClient.OpenNewAccount(new AccountPayment(StaticMainData.Accounts.GetNewId(),
-                        _newAccountCurrency,
-                        _rememberSelectedClient.Id));
-                    break;
-                default:
-                    break;
-            }
-            
-            StaticMainData.SaveAllData();
-            _newAccountWindow.DialogResult = true;
-        }
-        private bool CanAddAccountDialogCommandExecute(object p)
-        {
-            if (!((int.TryParse(_newAccountMoney, out int result)) && (result >= 0)))
-                return false;
-            return true;
-        }
-        #endregion
-        #endregion 
+        
 
         #region GetAccountCommand. При выборе клиента показывает его счета
         public ICommand GetAccountCommand { get; set; } //здесь живет сама команда (это по сути обычное свойство, чтобы его можно было вызвать из хамл)
@@ -189,7 +90,9 @@ namespace Homework_12_notMVVM.ViewModels
 
         private void OnAddAccountMainCommandExecuted(object p) //логика команды
         {
-            _newAccountWindow = new NewAccountWindow();
+            NewAccountWindow _newAccountWindow = new NewAccountWindow();
+            NewAccountWindowViewModel _newAccountWindowVM = new NewAccountWindowViewModel(_rememberSelectedClient, _newAccountWindow);
+            _newAccountWindow.DataContext = _newAccountWindowVM;
             _newAccountWindow.ShowDialog();
         }
         private bool CanAddAccountMainCommandExecute(object p)
@@ -204,41 +107,22 @@ namespace Homework_12_notMVVM.ViewModels
 
 
         #region Приватные методы VM
-        /// <summary>
-        /// Устанавливает накопительную ставку для нового накопительного счёта при внесении определенной суммы
-        /// </summary>
-        /// <returns>Ставка накопительного счёта</returns>
-        private double GetRate()
-        {
-            double rate;
-            if ((int.TryParse(_newAccountMoney, out int result)) && (result < 50000))
-                rate = 0.05;
-            else if ((int.TryParse(_newAccountMoney, out result)) && (result < 100000))
-                rate = 0.07;
-            else
-                rate = 0.09;
-
-            return rate;
-        }
+        
 
 
         /// <summary>
         /// Инициализирует команды
         /// </summary>
         private void InitializeCommand() 
-        {
-            NewAccountTypeChangedCommand = new RelayCommand(OnNewAccountTypeChangedCommandExecuted, CanNewAccountTypeChangedCommandExecute);
+        {            
             GetAccountCommand = new RelayCommand(OnGetAccountCommandExecuted, CanGetAccountCommandExecute);
-            AddAccountMainCommand = new RelayCommand(OnAddAccountMainCommandExecuted, CanAddAccountMainCommandExecute);
-            AddAccountDialogCommand = new RelayCommand(OnAddAccountDialogCommandExecuted, CanAddAccountDialogCommandExecute);
+            AddAccountMainCommand = new RelayCommand(OnAddAccountMainCommandExecuted, CanAddAccountMainCommandExecute);         
         }
         #endregion 
 
         public MainWindowViewModel()
         {            
-            Clients = StaticMainData.Clients.Data;            
-            _newAccountControlsView = Visibility.Hidden;
-            _newAccountMoney = "0";
+            Clients = StaticMainData.Clients.Data;
             InitializeCommand();            
         }
     }

@@ -6,11 +6,9 @@
         xmlns:local="clr-namespace:Homework_12_notMVVM.View"
         xmlns:vm="clr-namespace:Homework_12_notMVVM.ViewModels" 
         xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
-        mc:Ignorable="d"
+        mc:Ignorable="d"        
         Title="Открытие нового счёта" Height="250" Width="300">
-    <Window.DataContext>
-        <vm:MainWindowViewModel/>
-    </Window.DataContext>
+    
     <DockPanel>
         <UniformGrid DockPanel.Dock="Bottom" Rows="1" Columns="2">
             <Button Height="30" Width="100" Margin="10"  Content="Открыть счёт" Command="{Binding Path=AddAccountDialogCommand}" 
@@ -19,7 +17,7 @@
         </UniformGrid>
         <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" Margin="5">
             <TextBlock Text="Открытие счета для: "/>
-            <TextBlock Text="{Binding Path=SelectedClient.Name}"/>
+            <TextBlock Text="{Binding Path=SelectedClient.Name, Mode=OneTime}"/>
         </StackPanel>
         <Grid Margin="5">
             <Grid.ColumnDefinitions>

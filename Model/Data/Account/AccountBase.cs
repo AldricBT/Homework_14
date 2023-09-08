@@ -14,9 +14,9 @@ namespace Homework_12_notMVVM.Model.Data.Account
     {
         public enum CurrencyEnum
         {
+            RUR,
             USD,
-            EUR,
-            RUR
+            EUR
         }
         public enum AccountTypeEnum
         {            
