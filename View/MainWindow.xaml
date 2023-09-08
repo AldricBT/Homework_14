@@ -14,20 +14,24 @@
 
     <Window.Resources>
         <Style TargetType="Button">
-            <Setter Property="FontFamily" Value="Arial" />
-            <Setter Property="FontSize" Value="20"/>
-            <Setter Property="Width" Value="130"/>
+            <Setter Property="Height" Value="30"/>
+            <Setter Property="Width" Value="100"/>
+            <Setter Property="Margin" Value="5"/>
         </Style>
     </Window.Resources>
 
 
     <DockPanel>
         <!-- Счета -->
-        <StackPanel DockPanel.Dock="Right">
-            <StackPanel Orientation="Horizontal">
+        <DockPanel DockPanel.Dock="Right">
+            <StackPanel Orientation="Horizontal" DockPanel.Dock="Top" Margin="5">
                 <TextBlock Text="Счета клиента: "/>
                 <TextBlock Text="{Binding Path=SelectedClient.Name}"/>
             </StackPanel>
+            <StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal" Margin="0,15">
+                <Button  Content="Новый счёт" Command="{Binding AddAccountMainCommand}"/>
+            </StackPanel>
+            
             
             <DataGrid ItemsSource="{Binding Path=ClientAccounts, UpdateSourceTrigger=PropertyChanged}"  HorizontalAlignment="Left" Margin="5"
                       AutoGenerateColumns="False" CanUserAddRows="False" SelectionMode="Single"  Width="500"
@@ -43,8 +47,8 @@
                 </DataGrid.Columns>
             </DataGrid>
 
-            <Button Content="Новый счёт" Command="{Binding AddAccountMainCommand}"/>
-        </StackPanel>
+            
+        </DockPanel>
         
 
         <!-- Клиенты -->
