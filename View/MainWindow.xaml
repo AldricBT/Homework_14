@@ -28,10 +28,12 @@
                 <TextBlock Text="Счета клиента: "/>
                 <TextBlock Text="{Binding Path=SelectedClient.Name}"/>
             </StackPanel>
-            <StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal" Margin="0,15">
+            <UniformGrid Rows="1" Columns="4" DockPanel.Dock="Bottom" Margin="0,15">
                 <Button  Content="Новый счёт" Command="{Binding AddAccountMainCommand}"/>
                 <Button  Content="Закрыть счёт" Command="{Binding CloseAccountCommand}"/>
-            </StackPanel>
+                <Button  Content="Пополнить счёт" Command="{Binding AddMoneyAccountCommand}"/>
+                <Button  Content="Перевести" Command="{Binding SendMoneyAccountCommand}"/>
+            </UniformGrid>
             
             
             <DataGrid ItemsSource="{Binding Path=ClientAccounts, UpdateSourceTrigger=PropertyChanged}"  HorizontalAlignment="Left" Margin="5"
