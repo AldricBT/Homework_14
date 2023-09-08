@@ -15,8 +15,8 @@ namespace Homework_12_notMVVM.Model.Data.Account
         }
 
 
-        public AccountSavings(int id, CurrencyEnum currency, int clientId, double rate) : 
-            base(id, currency, clientId, AccountTypeEnum.Накопительный)
+        public AccountSavings(int id, CurrencyEnum currency, double money, int clientId, double rate) : 
+            base(id, money, currency, clientId, AccountTypeEnum.Накопительный)
         {
             _rate = rate;
         }

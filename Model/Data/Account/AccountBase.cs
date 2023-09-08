@@ -19,9 +19,9 @@ namespace Homework_12_notMVVM.Model.Data.Account
             EUR
         }
         public enum AccountTypeEnum
-        {            
-            Накопительный,            
-            Расчётный
+        {              
+            Расчётный,
+            Накопительный
         }
 
         private readonly int _id;

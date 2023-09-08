@@ -30,6 +30,7 @@
             </StackPanel>
             <StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal" Margin="0,15">
                 <Button  Content="Новый счёт" Command="{Binding AddAccountMainCommand}"/>
+                <Button  Content="Закрыть счёт" Command="{Binding CloseAccountCommand}"/>
             </StackPanel>
             
             

@@ -47,7 +47,10 @@ namespace Homework_12_notMVVM.ViewModels
             set
             {
                 Set(ref _newAccountMoney, value);
-                NewAccountRateInfo = $"{GetRate() * 100}%";
+                if ((int.TryParse(_newAccountMoney, out int money))&&(money > 0))
+                    NewAccountRateInfo = $"{GetRate() * 100}%";
+                else
+                    NewAccountRateInfo = $"";
             }
         }
         private string _newAccountMoney;
@@ -98,8 +101,8 @@ namespace Homework_12_notMVVM.ViewModels
                     if (_newAccountCurrency == AccountBase.CurrencyEnum.RUR)
                         rate = GetRate();
 
-                    _selectedClient.OpenNewAccount(new AccountSavings(StaticMainData.Accounts.GetNewId(),
-                        _newAccountCurrency,
+                    _selectedClient.OpenNewAccount(new AccountSavings(StaticMainData.Accounts.GetNewId(), 
+                        _newAccountCurrency, Int32.Parse(_newAccountMoney),
                         _selectedClient.Id, rate));
                     break;
                 case AccountBase.AccountTypeEnum.Расчётный:

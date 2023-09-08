@@ -103,11 +103,53 @@ namespace Homework_12_notMVVM.ViewModels
         }
         #endregion
 
+        #region CloseAccountCommand. Команда закрытия счёта 
+        public ICommand CloseAccountCommand { get; set; } //здесь живет сама команда (это по сути обычное свойство, чтобы его можно было вызвать из хамл)
+
+        private void OnCloseAccountCommandExecuted(object p) //логика команды
+        {
+            string messageBoxText, caption;
+            MessageBoxButton button;
+            MessageBoxImage icon;
+            MessageBoxResult result;
+            if (_selectedAccount.Money > 0)
+            {
+                messageBoxText = $"Можно закрыть только пустой счёт!";
+                caption = $"Неудалось закрыть счёт";
+                button = MessageBoxButton.OK;
+                icon = MessageBoxImage.Warning;
+                MessageBox.Show(messageBoxText, caption, button, icon, MessageBoxResult.Yes);
+
+                return;
+            }
+
+            messageBoxText = $"Закрыть счёт номер: {_selectedAccount.Id}?";
+            caption = $"Закрытие счёта {_selectedAccount.Id}";
+            button = MessageBoxButton.YesNo;
+            icon = MessageBoxImage.Question;
+
+            result = MessageBox.Show(messageBoxText, caption, button, icon, MessageBoxResult.Yes);
+            if (MessageBoxResult.No == result)
+                return;
+
+            _selectedClient.RemoveAccount(_selectedAccount);            
+            StaticMainData.SaveAllData();
+
+            
+        }
+        private bool CanCloseAccountCommandExecute(object p)
+        {
+            if (_selectedAccount is null)
+                return false;
+            return true;
+        }
+        #endregion
+
         #endregion
 
 
-        #region Приватные методы VM
-        
+        #region Приватные методы VM 
+
 
 
         /// <summary>
@@ -116,7 +158,8 @@ namespace Homework_12_notMVVM.ViewModels
         private void InitializeCommand() 
         {            
             GetAccountCommand = new RelayCommand(OnGetAccountCommandExecuted, CanGetAccountCommandExecute);
-            AddAccountMainCommand = new RelayCommand(OnAddAccountMainCommandExecuted, CanAddAccountMainCommandExecute);         
+            AddAccountMainCommand = new RelayCommand(OnAddAccountMainCommandExecuted, CanAddAccountMainCommandExecute);
+            CloseAccountCommand = new RelayCommand(OnCloseAccountCommandExecuted, CanCloseAccountCommandExecute);
         }
         #endregion 
 
