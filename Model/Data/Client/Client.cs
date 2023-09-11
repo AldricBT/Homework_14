@@ -59,11 +59,10 @@ namespace Homework_12_notMVVM.Model.Data
         /// Открытие счёта
         /// </summary>
         public void OpenNewAccount(AccountBase account)
-        {
+        {            
             StaticMainData.Accounts.Add(account);
             //добавление ссылки на счет клиента в данные клиента
-            _accounts =  StaticMainData.Accounts;
-            
+            _accounts.Add(account);
         }
 
         public void RemoveAccount(AccountBase account)
@@ -81,5 +80,33 @@ namespace Homework_12_notMVVM.Model.Data
         {
             return new Client(this._id, this._name, this._accounts);
         }
+
+        ///// <summary>
+        ///// Открытие накопительного счёта
+        ///// </summary>
+        ///// <param name="currency">Валюта счёта</param>
+        ///// <param name="rate">Ставка счёта</param>
+        //public void OpenNewAccount(AccountBase.CurrencyEnum currency, double rate)
+        //{
+        //    int newAccontId = StaticMainData.Accounts.GetNewId();
+        //    AccountBase addingAccount = new AccountSavings(newAccontId, currency, _id, rate); ;
+        //    StaticMainData.Accounts.Add(addingAccount);
+        //    //добавление ссылки на счет клиента в данные клиента
+        //    _accounts.Add(addingAccount);
+        //}
+
+        ///// <summary>
+        ///// Открытие расчётного счета
+        ///// </summary>
+        ///// <param name="currency">Валюта счета</param>
+        //public void OpenNewAccount(AccountBase.CurrencyEnum currency)
+        //{
+        //    int newAccontId = StaticMainData.Accounts.GetNewId();
+        //    AccountBase addingAccount = new AccountPayment(newAccontId, currency, _id); ;
+        //    StaticMainData.Accounts.Add(addingAccount);
+        //    //добавление ссылки на счет клиента в данные клиента
+        //    _accounts.Add(addingAccount);
+        //}
+
     }
 }

@@ -41,10 +41,8 @@ namespace Homework_12_notMVVM.ViewModels
         public ICommand AddMoneyDialogCommand { get; set; } //здесь живет сама команда (это по сути обычное свойство, чтобы его можно было вызвать из хамл)
 
         private void OnAddMoneyDialogCommandExecuted(object p) //логика команды
-        {            
-            StaticMainData.Accounts.Data.Where(a => a.Id == _selectedAccount.Id).First().AddMoney(int.Parse(_addedMoney));
-            //StaticMainData.Clients.Data.Where(a => a.Id == _selectedAccount.Id).First().AddMoney(int.Parse(_addedMoney));
-            
+        {
+            _selectedAccount.AddMoney(int.Parse(_addedMoney));
 
             StaticMainData.SaveAllData();
             _addMoneyWindow.DialogResult = true;
