@@ -55,6 +55,9 @@ namespace Homework_12_notMVVM.Model.Data
             _accounts = accounts;
         }
 
+        // Эта группа методов реализована таким образом, так как при десериализации баз данных
+        // происходит создания двух независимых экземпляров AccountsData и _accounts у клиентов. Связать их ссылками не удается.
+        // Все упирается в нелогичность наличия отдельной базы данных счётов (она существует только из-за требований задания)
         /// <summary>
         /// Открытие счёта
         /// </summary>
@@ -65,10 +68,25 @@ namespace Homework_12_notMVVM.Model.Data
             _accounts.Add(account);
         }
 
+        /// <summary>
+        /// Закрытие счёта
+        /// </summary>
+        /// <param name="account"></param>
         public void RemoveAccount(AccountBase account)
         {
             StaticMainData.Accounts.Remove(account);
             _accounts.Remove(account);
+        }
+
+        /// <summary>
+        /// Добавление денег на выбранный счёт
+        /// </summary>
+        /// <param name="account"></param>
+        /// <param name="addedMoney"></param>
+        public void AddMoney(AccountBase account, int addedMoney)
+        {
+            StaticMainData.Accounts.Data.Where(a => a.Id == account.Id).First().AddMoney(addedMoney);
+            _accounts.Where(a => a.Id == account.Id).First().AddMoney(addedMoney);
         }
 
         public override string ToString()

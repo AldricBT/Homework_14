@@ -15,6 +15,7 @@ namespace Homework_12_notMVVM.ViewModels
     internal class AddMoneyWindowViewModel : ViewModel
     {
         private AccountBase _selectedAccount;
+        private Client _selectedClient;
         private AddMoneyWindow _addMoneyWindow;
 
         #region AccountId. Номер счёта
@@ -42,8 +43,8 @@ namespace Homework_12_notMVVM.ViewModels
 
         private void OnAddMoneyDialogCommandExecuted(object p) //логика команды
         {
-            _selectedAccount.AddMoney(int.Parse(_addedMoney));
-
+            StaticMainData.Clients.Data.Where(c => c.Id == _selectedClient.Id).First().AddMoney(_selectedAccount, int.Parse(_addedMoney));
+            
             StaticMainData.SaveAllData();
             _addMoneyWindow.DialogResult = true;
 
@@ -61,9 +62,10 @@ namespace Homework_12_notMVVM.ViewModels
         {
             AddMoneyDialogCommand = new RelayCommand(OnAddMoneyDialogCommandExecuted, CanAddMoneyDialogCommandExecute);
         }
-        public AddMoneyWindowViewModel(AccountBase selectedAccount, AddMoneyWindow addMoneyWindow)            
+        public AddMoneyWindowViewModel(AccountBase selectedAccount, Client selectedClient, AddMoneyWindow addMoneyWindow)            
         {
             _selectedAccount = selectedAccount;
+            _selectedClient = selectedClient;
             _addMoneyWindow = addMoneyWindow;
             _accountId = selectedAccount.Id;
             _accountCurrency = selectedAccount.Currency;

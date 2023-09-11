@@ -153,12 +153,9 @@ namespace Homework_12_notMVVM.ViewModels
         public ICommand AddMoneyAccountCommand { get; set; } //здесь живет сама команда (это по сути обычное свойство, чтобы его можно было вызвать из хамл)
 
         private void OnAddMoneyAccountCommandExecuted(object p) //логика команды
-        {
-            _selectedAccount.AddMoney(10);
-            StaticMainData.SaveAllData();
-
+        {   
             AddMoneyWindow _addMoneyWindow = new AddMoneyWindow();
-            AddMoneyWindowViewModel _addMoneyWindowVM = new AddMoneyWindowViewModel(_selectedAccount, _addMoneyWindow);
+            AddMoneyWindowViewModel _addMoneyWindowVM = new AddMoneyWindowViewModel(_selectedAccount, _selectedClient, _addMoneyWindow);
             _addMoneyWindow.DataContext = _addMoneyWindowVM;
             _addMoneyWindow.ShowDialog();
         }
