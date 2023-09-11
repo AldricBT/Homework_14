@@ -1,7 +1,6 @@
 ﻿using Homework_12_notMVVM.Infrastructure.Commands;
 using Homework_12_notMVVM.Model.Data;
 using Homework_12_notMVVM.Model.Data.Account;
-using Homework_12_notMVVM.Model.Workers;
 using Homework_12_notMVVM.View;
 using Homework_12_notMVVM.ViewModels.Base;
 using System;
@@ -77,9 +76,7 @@ namespace Homework_12_notMVVM.ViewModels
         private void OnGetAccountCommandExecuted(object p) //логика команды
         {
             ClientAccounts = StaticMainData.Clients.Data.Where(c => c.Id == SelectedClient.Id).First().Accounts; //создает новый список новых объектов, а не ссылок!
-            //ClientAccounts = StaticMainData.Accounts.Data;
-            ClientAccounts[0].AddMoney(10);//asdasdasdas
-            StaticMainData.SaveAllData();//asdasdasasdasd
+            
             _rememberSelectedClient = (Client)SelectedClient.Clone();
             
         }
