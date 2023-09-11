@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Homework_12_notMVVM.ViewModels.Base;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -10,7 +11,7 @@ namespace Homework_12_notMVVM.Model.Data.Account
 {
     [JsonDerivedType(typeof(AccountPayment), typeDiscriminator: "payments")]
     [JsonDerivedType(typeof(AccountSavings), typeDiscriminator: "savings")]    
-    public abstract class AccountBase
+    public abstract class AccountBase : ViewModel
     {
         public enum CurrencyEnum
         {

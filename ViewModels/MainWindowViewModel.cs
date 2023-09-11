@@ -158,6 +158,7 @@ namespace Homework_12_notMVVM.ViewModels
             AddMoneyWindowViewModel _addMoneyWindowVM = new AddMoneyWindowViewModel(_selectedAccount, _selectedClient, _addMoneyWindow);
             _addMoneyWindow.DataContext = _addMoneyWindowVM;
             _addMoneyWindow.ShowDialog();
+            //OnPropertyChanged("ClientAccounts");
         }
         private bool CanAddMoneyAccountCommandExecute(object p)
         {

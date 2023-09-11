@@ -43,7 +43,7 @@ namespace Homework_12_notMVVM.Model.Data
             _name = name;
             _accounts = new ObservableCollection<AccountBase>();
             //При добавлении клиента автоматически открывает ему расчётный счет
-            OpenNewAccount(new AccountPayment(StaticMainData.Accounts.GetNewId(),
+            OpenNewAccount(new AccountPayment(StaticMainData.Accounts.GetNewId(),0,
                 AccountBase.CurrencyEnum.RUR, _id));
         }
 

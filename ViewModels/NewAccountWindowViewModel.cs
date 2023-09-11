@@ -102,11 +102,11 @@ namespace Homework_12_notMVVM.ViewModels
                         rate = GetRate();
 
                     _selectedClient.OpenNewAccount(new AccountSavings(StaticMainData.Accounts.GetNewId(), 
-                        _newAccountCurrency, Int32.Parse(_newAccountMoney),
+                        Int32.Parse(_newAccountMoney), _newAccountCurrency,
                         _selectedClient.Id, rate));
                     break;
                 case AccountBase.AccountTypeEnum.Расчётный:
-                    _selectedClient.OpenNewAccount(new AccountPayment(StaticMainData.Accounts.GetNewId(),
+                    _selectedClient.OpenNewAccount(new AccountPayment(StaticMainData.Accounts.GetNewId(),0,
                         _newAccountCurrency,
                         _selectedClient.Id));
                     break;
