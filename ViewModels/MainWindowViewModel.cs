@@ -1,7 +1,6 @@
 ﻿using Homework_12_notMVVM.Infrastructure.Commands;
 using Homework_12_notMVVM.Model.Data;
 using Homework_12_notMVVM.Model.Data.Account;
-using Homework_12_notMVVM.Model.Workers;
 using Homework_12_notMVVM.View;
 using Homework_12_notMVVM.ViewModels.Base;
 using System;
@@ -76,10 +75,7 @@ namespace Homework_12_notMVVM.ViewModels
 
         private void OnGetAccountCommandExecuted(object p) //логика команды
         {
-            ClientAccounts = StaticMainData.Clients.Data.Where(c => c.Id == SelectedClient.Id).First().Accounts; //создает новый список новых объектов, а не ссылок!
-            //ClientAccounts = StaticMainData.Accounts.Data;
-            ClientAccounts[0].AddMoney(10);//asdasdasdas
-            StaticMainData.SaveAllData();//asdasdasasdasd
+            ClientAccounts = StaticMainData.Clients.Data.Where(c => c.Id == SelectedClient.Id).First().Accounts; //создает новый список новых объектов, а не ссылок! счета клиентов и база данных счетов не связаны            
             _rememberSelectedClient = (Client)SelectedClient.Clone();
             
         }
@@ -157,9 +153,6 @@ namespace Homework_12_notMVVM.ViewModels
 
         private void OnAddMoneyAccountCommandExecuted(object p) //логика команды
         {
-            _selectedAccount.AddMoney(10);
-            StaticMainData.SaveAllData();
-
             AddMoneyWindow _addMoneyWindow = new AddMoneyWindow();
             AddMoneyWindowViewModel _addMoneyWindowVM = new AddMoneyWindowViewModel(_selectedAccount, _addMoneyWindow);
             _addMoneyWindow.DataContext = _addMoneyWindowVM;

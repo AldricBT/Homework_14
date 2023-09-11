@@ -1,6 +1,5 @@
 ﻿using Homework_12_notMVVM.Model;
 using Homework_12_notMVVM.Model.Data;
-using Homework_12_notMVVM.Model.Workers;
 using Homework_12_notMVVM.ViewModels;
 using System;
 using System.Collections.Generic;

@@ -35,7 +35,7 @@ namespace Homework_12_notMVVM.Model.Data
                 return 1;
             return Data.Max(c => c.Id) + 1;
         }
-
+               
         public ClientsData(string pathToData) :
             base(pathToData)        
         {
@@ -60,6 +60,6 @@ namespace Homework_12_notMVVM.Model.Data
         }
 
         public override object Clone() => new ClientsData(_pathToData);
-                
+
     }
 }
