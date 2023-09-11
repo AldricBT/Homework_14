@@ -76,13 +76,20 @@ namespace Homework_12_notMVVM.ViewModels
 
         private void OnGetAccountCommandExecuted(object p) //логика команды
         {
-            if (SelectedClient != null)
-            {
-                ClientAccounts = StaticMainData.Clients.Data.Where(c => c.Id == SelectedClient.Id).First().Accounts;
-                _rememberSelectedClient = (Client)SelectedClient.Clone();
-            }
+            ClientAccounts = StaticMainData.Clients.Data.Where(c => c.Id == SelectedClient.Id).First().Accounts; //создает новый список новых объектов, а не ссылок!
+            //ClientAccounts = StaticMainData.Accounts.Data;
+            ClientAccounts[0].AddMoney(10);//asdasdasdas
+            StaticMainData.SaveAllData();//asdasdasasdasd
+            _rememberSelectedClient = (Client)SelectedClient.Clone();
+            
         }
-        private bool CanGetAccountCommandExecute(object p) => true; //если команда должна быть доступна всегда, то просто возвращаем true                
+        private bool CanGetAccountCommandExecute(object p)
+        {
+            if (SelectedClient != null)
+                return true;
+            return false;
+        }
+        
         #endregion
 
         #region AddAccountMainCommand. Команда добавления нового счёта в главном окне. для открытия диалога
@@ -150,7 +157,13 @@ namespace Homework_12_notMVVM.ViewModels
 
         private void OnAddMoneyAccountCommandExecuted(object p) //логика команды
         {
+            _selectedAccount.AddMoney(10);
+            StaticMainData.SaveAllData();
 
+            AddMoneyWindow _addMoneyWindow = new AddMoneyWindow();
+            AddMoneyWindowViewModel _addMoneyWindowVM = new AddMoneyWindowViewModel(_selectedAccount, _addMoneyWindow);
+            _addMoneyWindow.DataContext = _addMoneyWindowVM;
+            _addMoneyWindow.ShowDialog();
         }
         private bool CanAddMoneyAccountCommandExecute(object p)
         {
@@ -164,7 +177,7 @@ namespace Homework_12_notMVVM.ViewModels
 
 
         #region Приватные методы VM  
-
+                
 
 
         /// <summary>

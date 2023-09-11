@@ -134,7 +134,6 @@
     <Compile Include="Model\Data\Client\Client.cs" />
     <Compile Include="Model\Data\Client\ClientsData.cs" />
     <Compile Include="Model\Data\StaticMainData.cs" />
-    <Compile Include="Model\Data\PublicData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
