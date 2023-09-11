@@ -145,10 +145,25 @@ namespace Homework_12_notMVVM.ViewModels
         }
         #endregion
 
+        #region AddMoneyAccountCommand. Команда внесения денег на счёт
+        public ICommand AddMoneyAccountCommand { get; set; } //здесь живет сама команда (это по сути обычное свойство, чтобы его можно было вызвать из хамл)
+
+        private void OnAddMoneyAccountCommandExecuted(object p) //логика команды
+        {
+
+        }
+        private bool CanAddMoneyAccountCommandExecute(object p)
+        {
+            if (_selectedAccount is null)
+                return false;
+            return true;
+        }
+        #endregion
+
         #endregion
 
 
-        #region Приватные методы VM 
+        #region Приватные методы VM  
 
 
 
@@ -160,6 +175,7 @@ namespace Homework_12_notMVVM.ViewModels
             GetAccountCommand = new RelayCommand(OnGetAccountCommandExecuted, CanGetAccountCommandExecute);
             AddAccountMainCommand = new RelayCommand(OnAddAccountMainCommandExecuted, CanAddAccountMainCommandExecute);
             CloseAccountCommand = new RelayCommand(OnCloseAccountCommandExecuted, CanCloseAccountCommandExecute);
+            AddMoneyAccountCommand = new RelayCommand(OnAddMoneyAccountCommandExecuted, CanAddMoneyAccountCommandExecute);
         }
         #endregion 
 
