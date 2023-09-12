@@ -5,8 +5,23 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Homework_12_notMVVM.View"
         mc:Ignorable="d"
-        Title="TransferMoneyWindow" Height="450" Width="800">
-    <Grid>
-        
-    </Grid>
+        Title="Перевод денег" Height="250" Width="300">
+    
+    <StackPanel Margin="10" Orientation="Vertical">
+        <StackPanel Orientation="Horizontal" Margin="15">
+            <TextBlock Text="Пополнить счёт "/>
+            <TextBlock Text="{Binding AccountId, Mode=OneTime}"/>
+            <TextBlock Text=" на сумму:"/>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" Margin="15,0,0,5">
+            <TextBox Text="{Binding AddedMoney, UpdateSourceTrigger=PropertyChanged}"  Width="150"/>
+            <TextBlock Text="{Binding AccountCurrency, Mode=OneTime}" Margin="5,0"/>
+        </StackPanel>
+        <UniformGrid Rows="1" Columns="2">
+            <Button Content="Внести" Width="100" Height="30" Margin="5" Command="{Binding AddMoneyDialogCommand}"/>
+            <Button Content="Отмена" Width="100" Height="30" Margin="5" IsCancel="True"/>
+        </UniformGrid>
+
+
+    </StackPanel>
 </Window>

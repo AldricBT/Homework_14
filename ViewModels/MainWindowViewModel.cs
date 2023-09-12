@@ -22,8 +22,6 @@ namespace Homework_12_notMVVM.ViewModels
 
         #region Fields and properties
 
-        
-
         #region Clients. База клиентов
         public ObservableCollection<Client> Clients
         {
@@ -67,8 +65,6 @@ namespace Homework_12_notMVVM.ViewModels
 
 
         #region Commands 
-
-        
 
         #region GetAccountCommand. При выборе клиента показывает его счета
         public ICommand GetAccountCommand { get; set; } //здесь живет сама команда (это по сути обычное свойство, чтобы его можно было вызвать из хамл)
@@ -173,10 +169,10 @@ namespace Homework_12_notMVVM.ViewModels
 
         private void OnTransferMoneyCommandExecuted(object p) //логика команды
         {
-            AddMoneyWindow _addMoneyWindow = new AddMoneyWindow();
-            AddMoneyWindowViewModel _addMoneyWindowVM = new AddMoneyWindowViewModel(_selectedAccount, _selectedClient, _addMoneyWindow);
-            _addMoneyWindow.DataContext = _addMoneyWindowVM;
-            _addMoneyWindow.ShowDialog();
+            TransferMoneyWindow _transferMoneyWindow = new TransferMoneyWindow();
+            TransferMoneyWindowViewModel _transferMoneyWindowVM = new TransferMoneyWindowViewModel(_selectedAccount, _selectedClient, _transferMoneyWindow);
+            _transferMoneyWindow.DataContext = _transferMoneyWindowVM;
+            _transferMoneyWindow.ShowDialog();
 
         }
         private bool CanTransferMoneyCommandExecute(object p)
