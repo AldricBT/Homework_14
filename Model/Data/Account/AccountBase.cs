@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
@@ -11,8 +12,9 @@ namespace Homework_12_notMVVM.Model.Data.Account
 {
     [JsonDerivedType(typeof(AccountPayment), typeDiscriminator: "payments")]
     [JsonDerivedType(typeof(AccountSavings), typeDiscriminator: "savings")]    
-    public abstract class AccountBase : ViewModel
+    public abstract class AccountBase : INotifyPropertyChanged
     {
+        
         public enum CurrencyEnum
         {
             RUR,
@@ -37,7 +39,8 @@ namespace Homework_12_notMVVM.Model.Data.Account
         }
         public double Money
         {
-            get => _money;            
+            get => _money; 
+            private set => Set(ref _money, value);
         }
         public CurrencyEnum Currency
         {
@@ -78,13 +81,40 @@ namespace Homework_12_notMVVM.Model.Data.Account
         /// <param name="moneyAdded">Добавляемая или снимаемая сумма</param>
         public void AddMoney(double moneyAdded)
         {
-            if ((_money + moneyAdded) < 0)
+            if ((Money + moneyAdded) < 0)
                 return;
-            _money += moneyAdded;
+            Money += moneyAdded;
         }
 
+        #region Реализация INPC
+        public event PropertyChangedEventHandler PropertyChanged;
 
+        /// <summary>
+        /// Вызов события. Если явно не указывается название свойства, 
+        /// то используется имя свойства, в котором происходит вызов
+        /// </summary>
+        /// <param _name="propertyName"></param>
+        protected virtual void OnPropertyChanged([CallerMemberName] string PropertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(PropertyName));
+        }        
 
-
+        /// <summary>
+        /// Метод для сеттера свойств
+        /// </summary>
+        /// <typeparam _name="T"></typeparam>
+        /// <param _name="field">Поле во VM</param>
+        /// <param _name="value">Значение, записываемое в поле</param>
+        /// <param _name="PropertyName">Название обновляемого свойства 
+        /// (если вызывается в самом свойстве, то можно не указывать)</param>
+        /// <returns>Вызывает событие для изменения интерфейса</returns>
+        protected virtual bool Set<T>(ref T field, T value, [CallerMemberName] string PropertyName = null)
+        {
+            if (Equals(field, value)) return false;
+            field = value;
+            OnPropertyChanged(PropertyName);
+            return true;
+        }
+        #endregion
     }
 }

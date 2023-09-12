@@ -36,7 +36,7 @@
             </UniformGrid>
             
             
-            <DataGrid ItemsSource="{Binding Path=ClientAccounts, UpdateSourceTrigger=PropertyChanged}"  HorizontalAlignment="Left" Margin="5"
+            <DataGrid ItemsSource="{Binding Path=ClientAccounts}"  HorizontalAlignment="Left" Margin="5"
                       AutoGenerateColumns="False" CanUserAddRows="False" SelectionMode="Single"  Width="500"
                       SelectedItem="{Binding Path=SelectedAccount, UpdateSourceTrigger=PropertyChanged}">
                 <DataGrid.Columns>

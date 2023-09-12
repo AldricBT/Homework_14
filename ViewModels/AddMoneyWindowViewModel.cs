@@ -46,8 +46,8 @@ namespace Homework_12_notMVVM.ViewModels
             StaticMainData.Clients.Data.Where(c => c.Id == _selectedClient.Id).First().AddMoney(_selectedAccount, int.Parse(_addedMoney));
             
             StaticMainData.SaveAllData();
-            _addMoneyWindow.DialogResult = true;
-
+            OnPropertyChanged("ClientAccounts");
+            _addMoneyWindow.DialogResult = true;            
         }
         private bool CanAddMoneyDialogCommandExecute(object p)
         {
