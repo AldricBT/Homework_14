@@ -32,7 +32,7 @@
                 <Button  Content="Новый счёт" Command="{Binding AddAccountMainCommand}"/>
                 <Button  Content="Закрыть счёт" Command="{Binding CloseAccountCommand}"/>
                 <Button  Content="Пополнить счёт" Command="{Binding AddMoneyAccountCommand}"/>
-                <!--<Button  Content="Перевести" Command="{Binding SendMoneyAccountCommand}"/>-->
+                <Button  Content="Перевести" Command="{Binding TransferMoneyCommand}"/>
             </UniformGrid>
             
             

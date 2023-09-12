@@ -168,11 +168,27 @@ namespace Homework_12_notMVVM.ViewModels
         }
         #endregion
 
+        #region TransferMoneyCommand. Команда внесения денег на счёт
+        public ICommand TransferMoneyCommand { get; set; } //здесь живет сама команда (это по сути обычное свойство, чтобы его можно было вызвать из хамл)
+
+        private void OnTransferMoneyCommandExecuted(object p) //логика команды
+        {
+            
+
+        }
+        private bool CanTransferMoneyCommandExecute(object p)
+        {
+            if (!(_selectedAccount is null) && (_selectedAccount.Money > 0))
+                return true;
+            return false;
+        }
+        #endregion
+
         #endregion
 
 
         #region Приватные методы VM  
-                
+
 
 
         /// <summary>
@@ -184,6 +200,7 @@ namespace Homework_12_notMVVM.ViewModels
             AddAccountMainCommand = new RelayCommand(OnAddAccountMainCommandExecuted, CanAddAccountMainCommandExecute);
             CloseAccountCommand = new RelayCommand(OnCloseAccountCommandExecuted, CanCloseAccountCommandExecute);
             AddMoneyAccountCommand = new RelayCommand(OnAddMoneyAccountCommandExecuted, CanAddMoneyAccountCommandExecute);
+            TransferMoneyCommand = new RelayCommand(OnTransferMoneyCommandExecuted, CanTransferMoneyCommandExecute);
         }
         #endregion 
 
