@@ -2,6 +2,7 @@
 using Homework_12_notMVVM.Model.Data.Account;
 using Homework_12_notMVVM.View;
 using Homework_12_notMVVM.ViewModels.Base;
+using Homework_12_notMVVM.Model.Data.Clients;
 using System;
 using System.Collections.Generic;
 using System.Linq;

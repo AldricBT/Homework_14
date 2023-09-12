@@ -92,6 +92,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Model\Data\Clients\IAddMoney.cs" />
     <Compile Include="ViewModels\AddMoneyWindowViewModel.cs" />
     <Compile Include="ViewModels\NewAccountWindowViewModel.cs" />
     <Compile Include="ViewModels\TransferMoneyWindowViewModel.cs" />
@@ -139,8 +140,8 @@
     <Compile Include="Model\Data\Account\AccountPayment.cs" />
     <Compile Include="Model\Data\Account\AccountSavings.cs" />
     <Compile Include="Model\Data\Base\DataBase.cs" />
-    <Compile Include="Model\Data\Client\Client.cs" />
-    <Compile Include="Model\Data\Client\ClientsData.cs" />
+    <Compile Include="Model\Data\Clients\Client.cs" />
+    <Compile Include="Model\Data\Clients\ClientsData.cs" />
     <Compile Include="Model\Data\StaticMainData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>

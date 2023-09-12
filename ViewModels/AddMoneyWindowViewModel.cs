@@ -1,6 +1,7 @@
 ﻿using Homework_12_notMVVM.Infrastructure.Commands;
 using Homework_12_notMVVM.Model.Data;
 using Homework_12_notMVVM.Model.Data.Account;
+using Homework_12_notMVVM.Model.Data.Clients;
 using Homework_12_notMVVM.View;
 using Homework_12_notMVVM.ViewModels.Base;
 using System;

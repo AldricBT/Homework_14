@@ -1,4 +1,5 @@
-﻿using Homework_12_notMVVM.ViewModels.Base;
+﻿using Homework_12_notMVVM.Model.Data.Clients;
+using Homework_12_notMVVM.ViewModels.Base;
 using System;
 using System.Collections.Generic;
 using System.Linq;

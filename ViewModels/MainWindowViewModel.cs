@@ -3,6 +3,7 @@ using Homework_12_notMVVM.Model.Data;
 using Homework_12_notMVVM.Model.Data.Account;
 using Homework_12_notMVVM.View;
 using Homework_12_notMVVM.ViewModels.Base;
+using Homework_12_notMVVM.Model.Data.Clients;
 using System;
 using System.CodeDom;
 using System.Collections.Generic;
@@ -150,7 +151,7 @@ namespace Homework_12_notMVVM.ViewModels
 
         private void OnAddMoneyAccountCommandExecuted(object p) //логика команды
         {   
-            AddMoneyWindow _addMoneyWindow = new AddMoneyWindow();
+            AddMoneyWindow _addMoneyWindow = new AddMoneyWindow();            
             AddMoneyWindowViewModel _addMoneyWindowVM = new AddMoneyWindowViewModel(_selectedAccount, _selectedClient, _addMoneyWindow);
             _addMoneyWindow.DataContext = _addMoneyWindowVM;
             _addMoneyWindow.ShowDialog();

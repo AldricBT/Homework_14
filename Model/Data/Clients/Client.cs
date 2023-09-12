@@ -9,9 +9,9 @@ using System.Text;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
-namespace Homework_12_notMVVM.Model.Data
+namespace Homework_12_notMVVM.Model.Data.Clients
 {
-    public class Client : ViewModel, ICloneable //чтобы заново не реализовывать INPC
+    public class Client : ViewModel, ICloneable, IAddMoney<AccountBase> //чтобы заново не реализовывать INPC
     {
         private int _id;
         private string _name;
@@ -83,13 +83,18 @@ namespace Homework_12_notMVVM.Model.Data
         /// </summary>
         /// <param name="account"></param>
         /// <param name="addedMoney"></param>
-        public void AddMoney(AccountBase account, int addedMoney)
+        public AccountBase AddMoney(AccountBase account, int addedMoney)
         {
-            StaticMainData.Accounts.Data.Where(a => a.Id == account.Id).First().AddMoney(addedMoney);
-            _accounts.Where(a => a.Id == account.Id).First().AddMoney(addedMoney);
-        }
 
-        public override string ToString()
+            throw new NotImplementedException();
+        }
+    //public void AddMoney(AccountBase account, int addedMoney)
+    //{
+    //    StaticMainData.Accounts.Data.Where(a => a.Id == account.Id).First().AddMoney(addedMoney);
+    //    _accounts.Where(a => a.Id == account.Id).First().AddMoney(addedMoney);
+    //}
+
+    public override string ToString()
         {
             return $"{Id}: {Name}, numofacc: {Accounts.Count} ";
         }
@@ -98,6 +103,8 @@ namespace Homework_12_notMVVM.Model.Data
         {
             return new Client(this._id, this._name, this._accounts);
         }
+
+        
 
         ///// <summary>
         ///// Открытие накопительного счёта
