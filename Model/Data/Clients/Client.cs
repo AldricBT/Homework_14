@@ -82,19 +82,14 @@ namespace Homework_12_notMVVM.Model.Data.Clients
         /// Добавление денег на выбранный счёт
         /// </summary>
         /// <param name="account"></param>
-        /// <param name="addedMoney"></param>
-        public AccountBase AddMoney(AccountBase account, int addedMoney)
+        /// <param name="addedMoney"></param>        
+        public void AddMoney(AccountBase account, int addedMoney)
         {
-
-            throw new NotImplementedException();
+            StaticMainData.Accounts.Data.Where(a => a.Id == account.Id).First().AddMoney(addedMoney);
+            _accounts.Where(a => a.Id == account.Id).First().AddMoney(addedMoney);
         }
-    //public void AddMoney(AccountBase account, int addedMoney)
-    //{
-    //    StaticMainData.Accounts.Data.Where(a => a.Id == account.Id).First().AddMoney(addedMoney);
-    //    _accounts.Where(a => a.Id == account.Id).First().AddMoney(addedMoney);
-    //}
 
-    public override string ToString()
+        public override string ToString()
         {
             return $"{Id}: {Name}, numofacc: {Accounts.Count} ";
         }
