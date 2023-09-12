@@ -1,4 +1,5 @@
 ﻿using Homework_12_notMVVM.Model.Data.Account;
+using Homework_12_notMVVM.Model.Data.Clients;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Homework_12_notMVVM.Model.Data
 {
-    public class AccountsData : DataBase<AccountBase>
+    public class AccountsData<T> : DataBase<T>, ICovariance<T> where T : AccountBase
     {
         private readonly string _pathToAccountData;
         public AccountsData(string pathToAccountData) :
@@ -26,8 +27,7 @@ namespace Homework_12_notMVVM.Model.Data
                 return 1;
             return Data.Max(c => c.Id) + 1;
         }
-
-        public override object Clone() => new AccountsData(_pathToAccountData);
+                
 
     }
 }

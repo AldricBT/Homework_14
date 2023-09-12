@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Homework_12_notMVVM.Model.Data
 {    
-    public abstract class DataBase<T> : ICloneable
+    public abstract class DataBase<T> 
         where T : class
     {
         private readonly string _pathToData;
@@ -77,8 +77,7 @@ namespace Homework_12_notMVVM.Model.Data
             string jsonString = JsonSerializer.Serialize(_dataList);
             File.WriteAllText(_pathToData, jsonString);
         }
-
-        public abstract object Clone();
+                
     }
 }
 

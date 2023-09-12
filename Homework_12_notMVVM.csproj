@@ -92,7 +92,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Model\Data\Clients\IAddMoney.cs" />
+    <Compile Include="Model\Data\Clients\ICovariance.cs" />
     <Compile Include="ViewModels\AddMoneyWindowViewModel.cs" />
     <Compile Include="ViewModels\NewAccountWindowViewModel.cs" />
     <Compile Include="ViewModels\TransferMoneyWindowViewModel.cs" />

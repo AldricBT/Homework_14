@@ -1,4 +1,5 @@
-﻿using Homework_12_notMVVM.Model.Data.Clients;
+﻿using Homework_12_notMVVM.Model.Data.Account;
+using Homework_12_notMVVM.Model.Data.Clients;
 using Homework_12_notMVVM.ViewModels.Base;
 using System;
 using System.Collections.Generic;
@@ -12,7 +13,7 @@ namespace Homework_12_notMVVM.Model.Data
     public static class StaticMainData
     {
         private static readonly ClientsData _clients;
-        private static readonly AccountsData _accounts;
+        private static readonly AccountsData<AccountBase> _accounts;
 
         private static readonly string _pathToClientsData = "clients.json";
         private static readonly string _pathToAccountsData= "accounts.json";
@@ -22,7 +23,7 @@ namespace Homework_12_notMVVM.Model.Data
         {
             get => _clients;
         }
-        public static AccountsData Accounts
+        public static AccountsData<AccountBase> Accounts
         {
             get => _accounts;
         } 
@@ -43,7 +44,7 @@ namespace Homework_12_notMVVM.Model.Data
 
         static StaticMainData()
         {
-            _accounts = new AccountsData(_pathToAccountsData);
+            _accounts = new AccountsData<AccountBase>(_pathToAccountsData);
             _clients = new ClientsData(_pathToClientsData);
             
         }

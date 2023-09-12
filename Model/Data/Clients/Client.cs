@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace Homework_12_notMVVM.Model.Data.Clients
 {
-    public class Client : ViewModel, ICloneable, IAddMoney<AccountBase> //чтобы заново не реализовывать INPC
+    public class Client : ICloneable
     {
         private int _id;
         private string _name;

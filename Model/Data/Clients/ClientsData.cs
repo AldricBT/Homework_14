@@ -57,9 +57,6 @@ namespace Homework_12_notMVVM.Model.Data.Clients
             {
                 Data.Add(new Client(i + 1, $"Имя_{i + 1}"));
             }
-        }
-
-        public override object Clone() => new ClientsData(_pathToData);
-                
+        }                
     }
 }
