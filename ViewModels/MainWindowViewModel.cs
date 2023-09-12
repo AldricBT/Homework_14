@@ -173,7 +173,10 @@ namespace Homework_12_notMVVM.ViewModels
 
         private void OnTransferMoneyCommandExecuted(object p) //логика команды
         {
-            
+            AddMoneyWindow _addMoneyWindow = new AddMoneyWindow();
+            AddMoneyWindowViewModel _addMoneyWindowVM = new AddMoneyWindowViewModel(_selectedAccount, _selectedClient, _addMoneyWindow);
+            _addMoneyWindow.DataContext = _addMoneyWindowVM;
+            _addMoneyWindow.ShowDialog();
 
         }
         private bool CanTransferMoneyCommandExecute(object p)

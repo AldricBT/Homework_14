@@ -94,11 +94,15 @@
     </ApplicationDefinition>
     <Compile Include="ViewModels\AddMoneyWindowViewModel.cs" />
     <Compile Include="ViewModels\NewAccountWindowViewModel.cs" />
+    <Compile Include="ViewModels\TransferMoneyWindowViewModel.cs" />
     <Compile Include="View\AddMoneyWindow.xaml.cs">
       <DependentUpon>AddMoneyWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\NewAccountWindow.xaml.cs">
       <DependentUpon>NewAccountWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\TransferMoneyWindow.xaml.cs">
+      <DependentUpon>TransferMoneyWindow.xaml</DependentUpon>
     </Compile>
     <Page Include="View\AddMoneyWindow.xaml">
       <SubType>Designer</SubType>
@@ -121,6 +125,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="View\NewAccountWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\TransferMoneyWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
