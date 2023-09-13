@@ -8,17 +8,22 @@
         Title="Перевод денег" Height="250" Width="300">
     
     <StackPanel Margin="10" Orientation="Vertical">
-        <StackPanel Orientation="Horizontal" Margin="15">
-            <TextBlock Text="Пополнить счёт "/>
-            <TextBlock Text="{Binding AccountId, Mode=OneTime}"/>
-            <TextBlock Text=" на сумму:"/>
+        <StackPanel Orientation="Horizontal" Margin="15,5">
+            <TextBlock Text="Перевести со счёта номер "/>
+            <TextBlock Text="{Binding SourceId, Mode=OneTime}"/>
+            <TextBlock Text=" сумму:"/>
         </StackPanel>
         <StackPanel Orientation="Horizontal" Margin="15,0,0,5">
-            <TextBox Text="{Binding AddedMoney, UpdateSourceTrigger=PropertyChanged}"  Width="150"/>
-            <TextBlock Text="{Binding AccountCurrency, Mode=OneTime}" Margin="5,0"/>
+            <TextBox Text="{Binding TransferMoney, UpdateSourceTrigger=PropertyChanged}"  Width="150"/>
+            <TextBlock Text="{Binding SourceCurrency, Mode=OneTime}" Margin="5,0"/>
         </StackPanel>
+        <StackPanel Orientation="Horizontal" Margin="15,5">
+            <TextBlock Text="На счёт номер: "/>
+            <TextBox Text="{Binding TargetId, UpdateSourceTrigger=PropertyChanged}"  Width="50"/>
+        </StackPanel>
+        <TextBlock Text="{Binding TextInfo, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Center"/>
         <UniformGrid Rows="1" Columns="2">
-            <Button Content="Внести" Width="100" Height="30" Margin="5" Command="{Binding AddMoneyDialogCommand}"/>
+            <Button Content="Перевести" Width="100" Height="30" Margin="5" Command="{Binding TransferMoneyDialogCommand}"/>
             <Button Content="Отмена" Width="100" Height="30" Margin="5" IsCancel="True"/>
         </UniformGrid>
 

@@ -164,7 +164,7 @@ namespace Homework_12_notMVVM.ViewModels
         }
         #endregion
 
-        #region TransferMoneyCommand. Команда внесения денег на счёт
+        #region TransferMoneyCommand. Команда перевода денег
         public ICommand TransferMoneyCommand { get; set; } //здесь живет сама команда (это по сути обычное свойство, чтобы его можно было вызвать из хамл)
 
         private void OnTransferMoneyCommandExecuted(object p) //логика команды
