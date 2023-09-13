@@ -85,7 +85,7 @@ namespace Homework_12_notMVVM.Model.Data
         /// <param name="addedMoney"></param>
         public void AddMoney(AccountBase account, int addedMoney)
         {
-            StaticMainData.Accounts.Data.Where(a => a.Id == account.Id).First().AddMoney(addedMoney);
+            //StaticMainData.Accounts.Data.Where(a => a.Id == account.Id).First().AddMoney(addedMoney);
             _accounts.Where(a => a.Id == account.Id).First().AddMoney(addedMoney);
         }
 

@@ -99,7 +99,6 @@ namespace Homework_12_notMVVM.ViewModels
             string messageBoxText, caption;
             MessageBoxButton button;
             MessageBoxImage icon;
-            MessageBoxResult result;
             //проверка на существование счёта куда переводят
             bool isSourseIdNotValid = (StaticMainData.Accounts.Data.Where(a => a.Id == int.Parse(_targetId)).Count() == 0);
             if (isSourseIdNotValid)
