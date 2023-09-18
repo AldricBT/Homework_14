@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Homework_12_notMVVM.Model.Data.Log
 {
-    internal class LogMessage
+    public class LogMessage
     {
         private readonly DateTime _date;
         private readonly string _message;

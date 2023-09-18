@@ -1,6 +1,7 @@
 ﻿using Homework_12_notMVVM.Infrastructure.Commands;
 using Homework_12_notMVVM.Model.Data;
 using Homework_12_notMVVM.Model.Data.Account;
+using Homework_12_notMVVM.Model.Data.Log;
 using Homework_12_notMVVM.View;
 using Homework_12_notMVVM.ViewModels.Base;
 using System;
@@ -227,12 +228,27 @@ namespace Homework_12_notMVVM.ViewModels
             AddClientMainCommand = new RelayCommand(OnAddClientMainCommandExecuted, CanAddClientMainCommandExecute);
             ShowLogCommand = new RelayCommand(OnShowLogCommandExecuted, CanShowLogCommandExecute);
         }
-        #endregion 
+        #endregion
+
+        /// <summary>
+        /// Инициализирует события (для записи в лог) ПРИ СОЗДАНИИ КЛИЕНТА!
+        /// </summary>
+        //private void InitialiseHandlerEvents()
+        //{
+        //    _selectedClient.AddAccountLog += (clientId, accountId) =>
+        //    {
+        //        StaticMainData.Log.Add(new LogMessage($"У клиента #{clientId} открыт новый счёт #{accountId}"));
+        //    };
+        //}
+
+
+
 
         public MainWindowViewModel()
         {            
             Clients = StaticMainData.Clients.Data;
-            InitializeCommand();            
+            InitializeCommand();
+            //InitialiseHandlerEvents();
         }
     }
 }

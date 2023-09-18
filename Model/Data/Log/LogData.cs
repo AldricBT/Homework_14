@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Homework_12_notMVVM.Model.Data.Log
 {
-    internal class LogData : DataBase<LogMessage>
+    public class LogData : DataBase<LogMessage>
     {
         
         public LogData(string pathToData) 

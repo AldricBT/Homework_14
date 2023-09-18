@@ -1,4 +1,5 @@
-﻿using Homework_12_notMVVM.ViewModels.Base;
+﻿using Homework_12_notMVVM.Model.Data.Log;
+using Homework_12_notMVVM.ViewModels.Base;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,10 +13,12 @@ namespace Homework_12_notMVVM.Model.Data
     {
         private static readonly ClientsData _clients;
         private static readonly AccountsData _accounts;
+        private static readonly LogData _log;
 
         private static readonly string _pathToClientsData = "clients.json";
         private static readonly string _pathToAccountsData= "accounts.json";
-               
+        private static readonly string _pathToLogData = "log.json";
+
 
         public static ClientsData Clients
         {
@@ -24,7 +27,11 @@ namespace Homework_12_notMVVM.Model.Data
         public static AccountsData Accounts
         {
             get => _accounts;
-        } 
+        }
+        public static LogData Log
+        {
+            get => _log;
+        }
         public static string PathToClientsData
         {
             get => _pathToClientsData;
@@ -33,17 +40,23 @@ namespace Homework_12_notMVVM.Model.Data
         {
             get => _pathToAccountsData;
         }
+        public static string PathToLogData
+        {
+            get => _pathToLogData;
+        }
 
         public static void SaveAllData()
         {
             _accounts.Save();
             _clients.Save();
+            _log.Save();
         }
 
         static StaticMainData()
         {
             _accounts = new AccountsData(_pathToAccountsData);
             _clients = new ClientsData(_pathToClientsData);
+            _log = new LogData(_pathToLogData);
             
         }
     }

@@ -13,7 +13,19 @@ namespace Homework_12_notMVVM.Model.Data
 {
     public class Client : ViewModel, ICloneable //чтобы заново не реализовывать INPC
     {
-        public event Action<string> OnLog;
+        private Action<int, int> _addAccountLog;
+        public event Action<int, int> AddAccountLog
+        {
+            add 
+            {
+                _addAccountLog -= value;
+                _addAccountLog += value;
+            }
+            remove
+            {
+                _addAccountLog -= value;
+            }
+        }
 
         private int _id;
         private string _name;
@@ -69,7 +81,7 @@ namespace Homework_12_notMVVM.Model.Data
             //добавление ссылки на счет клиента в данные клиента
             _accounts.Add(account);
 
-            OnLog?.Invoke("Открыт новый счёт");            
+            _addAccountLog?.Invoke(Id, account.Id);            
         }
 
         /// <summary>
@@ -81,7 +93,7 @@ namespace Homework_12_notMVVM.Model.Data
             StaticMainData.Accounts.Remove(account);
             _accounts.Remove(account);
 
-            OnLog?.Invoke("Закрыт счёт"); //По идее тут нужна информация какой счёт закрыт и у какого клиента
+            //OnLog?.Invoke(); 
         }
 
         /// <summary>
@@ -93,7 +105,7 @@ namespace Homework_12_notMVVM.Model.Data
         {            
             _accounts.Where(a => a.Id == account.Id).First().AddMoney(addedMoney);
 
-            OnLog?.Invoke("Внесение денег на счёт"); //По идее тут нужна информация
+            //OnLog?.Invoke(); 
         }
 
         public override string ToString()

@@ -1,6 +1,7 @@
 ﻿using Homework_12_notMVVM.Infrastructure.Commands;
 using Homework_12_notMVVM.Model.Data;
 using Homework_12_notMVVM.Model.Data.Account;
+using Homework_12_notMVVM.Model.Data.Log;
 using Homework_12_notMVVM.View;
 using Homework_12_notMVVM.ViewModels.Base;
 using System;
@@ -94,6 +95,8 @@ namespace Homework_12_notMVVM.ViewModels
 
         private void OnAddAccountDialogCommandExecuted(object p) //логика команды
         {
+            int newId = StaticMainData.Accounts.GetNewId();
+
             switch (_newAccountType)
             {
                 case AccountBase.AccountTypeEnum.Накопительный:
@@ -101,19 +104,19 @@ namespace Homework_12_notMVVM.ViewModels
                     if (_newAccountCurrency == AccountBase.CurrencyEnum.RUR)
                         rate = GetRate();
 
-                    _selectedClient.OpenNewAccount(new AccountSavings(StaticMainData.Accounts.GetNewId(), 
+                    _selectedClient.OpenNewAccount(new AccountSavings(newId, 
                         Int32.Parse(_newAccountMoney), _newAccountCurrency,
                         _selectedClient.Id, rate));
                     break;
                 case AccountBase.AccountTypeEnum.Расчётный:
-                    _selectedClient.OpenNewAccount(new AccountPayment(StaticMainData.Accounts.GetNewId(),0,
+                    _selectedClient.OpenNewAccount(new AccountPayment(newId, 0,
                         _newAccountCurrency,
                         _selectedClient.Id));
                     break;
                 default:
                     break;
             }
-
+            
             StaticMainData.SaveAllData();
             _newAccountWindow.DialogResult = true;
         }
@@ -124,6 +127,8 @@ namespace Homework_12_notMVVM.ViewModels
             return true;
         }
         #endregion
+        
+
         
 
         /// <summary>
@@ -156,6 +161,13 @@ namespace Homework_12_notMVVM.ViewModels
             _selectedClient = selectedClient;
             _newAccountWindow = newAccountWindow;
             InitializeCommand();
+
+            
+            _selectedClient.AddAccountLog += (clientId, accountId) =>
+            {
+                StaticMainData.Log.Add(new LogMessage($"У клиента #{clientId} открыт новый счёт #{accountId}"));
+            };
+
         }
     }
 }
