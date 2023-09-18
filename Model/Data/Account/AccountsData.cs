@@ -27,7 +27,6 @@ namespace Homework_12_notMVVM.Model.Data
             return Data.Max(c => c.Id) + 1;
         }
 
-        public override object Clone() => new AccountsData(_pathToAccountData);
 
     }
 }

@@ -59,7 +59,6 @@ namespace Homework_12_notMVVM.Model.Data
             }
         }
 
-        public override object Clone() => new ClientsData(_pathToData);
                 
     }
 }
