@@ -183,7 +183,31 @@ namespace Homework_12_notMVVM.ViewModels
         }
         #endregion
 
+        #region AddClientMainCommand. Команда добавления клиента
+        public ICommand AddClientMainCommand { get; set; } //здесь живет сама команда (это по сути обычное свойство, чтобы его можно было вызвать из хамл)
+
+        private void OnAddClientMainCommandExecuted(object p) //логика команды
+        {
+            AddClientWindow _addClientWindow = new AddClientWindow();
+            AddClientWindowViewModel _addClientWindowVM = new AddClientWindowViewModel(_addClientWindow);
+            _addClientWindow.DataContext = _addClientWindowVM;
+            _addClientWindow.ShowDialog();
+
+        }
+        private bool CanAddClientMainCommandExecute(object p) => true;
         #endregion
+
+        #region ShowLogCommand. Команда показа журнала действий
+        public ICommand ShowLogCommand { get; set; } //здесь живет сама команда (это по сути обычное свойство, чтобы его можно было вызвать из хамл)
+
+        private void OnShowLogCommandExecuted(object p) //логика команды
+        {            
+
+        }
+        private bool CanShowLogCommandExecute(object p) => true;
+        #endregion
+
+        #endregion 
 
 
         #region Приватные методы VM  
@@ -192,7 +216,7 @@ namespace Homework_12_notMVVM.ViewModels
 
         /// <summary>
         /// Инициализирует команды
-        /// </summary>
+        /// </summary> 
         private void InitializeCommand() 
         {            
             GetAccountCommand = new RelayCommand(OnGetAccountCommandExecuted, CanGetAccountCommandExecute);
@@ -200,6 +224,8 @@ namespace Homework_12_notMVVM.ViewModels
             CloseAccountCommand = new RelayCommand(OnCloseAccountCommandExecuted, CanCloseAccountCommandExecute);
             AddMoneyAccountCommand = new RelayCommand(OnAddMoneyAccountCommandExecuted, CanAddMoneyAccountCommandExecute);
             TransferMoneyCommand = new RelayCommand(OnTransferMoneyCommandExecuted, CanTransferMoneyCommandExecute);
+            AddClientMainCommand = new RelayCommand(OnAddClientMainCommandExecuted, CanAddClientMainCommandExecute);
+            ShowLogCommand = new RelayCommand(OnShowLogCommandExecuted, CanShowLogCommandExecute);
         }
         #endregion 
 

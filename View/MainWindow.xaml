@@ -15,7 +15,7 @@
     <Window.Resources>
         <Style TargetType="Button">
             <Setter Property="Height" Value="30"/>
-            <Setter Property="Width" Value="100"/>
+            <Setter Property="Width" Value="115"/>
             <Setter Property="Margin" Value="5"/>
         </Style>
     </Window.Resources>
@@ -55,21 +55,29 @@
         
 
         <!-- Клиенты -->
-        <DataGrid ItemsSource="{Binding Path=Clients, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Margin="20"
-                  AutoGenerateColumns="False" CanUserAddRows="False" SelectionMode="Single" 
-                  SelectedItem="{Binding Path=SelectedClient, UpdateSourceTrigger=PropertyChanged}">
-            <DataGrid.Columns>
-                <DataGridTextColumn Header="ID" Binding="{Binding Path=Id}" IsReadOnly="True" Width="Auto"/>
-                <DataGridTextColumn Header="Имя" Binding="{Binding Path=Name, UpdateSourceTrigger=PropertyChanged}" Width="*"/>
-            </DataGrid.Columns>
-            <i:Interaction.Triggers> 
-                <i:EventTrigger EventName="SelectionChanged">
-                    <i:InvokeCommandAction Command="{Binding GetAccountCommand}"/>
-                </i:EventTrigger>
-            </i:Interaction.Triggers>
+        <DockPanel>
+            <TextBlock DockPanel.Dock="Top" Height="26"/>
             
-        </DataGrid>
-        
+            <UniformGrid Rows="1" Columns="2" DockPanel.Dock="Bottom" Margin="0,15">
+                <Button  Content="Новый клиент" Command="{Binding AddClientMainCommand}"/>
+                <Button  Content="Журнал действий" Command="{Binding ShowLogCommand}"/>
+            </UniformGrid>
+            
+            <DataGrid ItemsSource="{Binding Path=Clients, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Margin="5"
+                      AutoGenerateColumns="False" CanUserAddRows="False" SelectionMode="Single" 
+                      SelectedItem="{Binding Path=SelectedClient, UpdateSourceTrigger=PropertyChanged}">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="ID" Binding="{Binding Path=Id}" IsReadOnly="True" Width="Auto"/>
+                    <DataGridTextColumn Header="Имя" Binding="{Binding Path=Name, UpdateSourceTrigger=PropertyChanged}" Width="*"/>
+                </DataGrid.Columns>
+                <i:Interaction.Triggers> 
+                    <i:EventTrigger EventName="SelectionChanged">
+                        <i:InvokeCommandAction Command="{Binding GetAccountCommand}"/>
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+            
+            </DataGrid>
+        </DockPanel>
     </DockPanel>
    
 </Window>
