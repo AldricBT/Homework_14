@@ -12,8 +12,7 @@ using System.Threading.Tasks;
 namespace Homework_12_notMVVM.Model.Data
 {
     public class ClientsData : DataBase<Client>
-    {            
-        private readonly string _pathToData;        
+    {          
 
         /// <summary>
         /// Удаление клиента по id
@@ -39,7 +38,6 @@ namespace Homework_12_notMVVM.Model.Data
         public ClientsData(string pathToData) :
             base(pathToData)        
         {
-            _pathToData = pathToData;
             if (!File.Exists(pathToData))                
             {
                 CreateRandomDB(10);

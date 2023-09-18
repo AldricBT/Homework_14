@@ -13,6 +13,8 @@ namespace Homework_12_notMVVM.Model.Data
 {
     public class Client : ViewModel, ICloneable //чтобы заново не реализовывать INPC
     {
+        public event Action<string> OnLog;
+
         private int _id;
         private string _name;
         private ObservableCollection<AccountBase> _accounts;
@@ -66,6 +68,8 @@ namespace Homework_12_notMVVM.Model.Data
             StaticMainData.Accounts.Add(account);
             //добавление ссылки на счет клиента в данные клиента
             _accounts.Add(account);
+
+            OnLog?.Invoke("Открыт новый счёт");            
         }
 
         /// <summary>
@@ -76,6 +80,8 @@ namespace Homework_12_notMVVM.Model.Data
         {
             StaticMainData.Accounts.Remove(account);
             _accounts.Remove(account);
+
+            OnLog?.Invoke("Закрыт счёт"); //По идее тут нужна информация какой счёт закрыт и у какого клиента
         }
 
         /// <summary>
@@ -84,9 +90,10 @@ namespace Homework_12_notMVVM.Model.Data
         /// <param name="account"></param>
         /// <param name="addedMoney"></param>
         public void AddMoney(AccountBase account, int addedMoney)
-        {
-            //StaticMainData.Accounts.Data.Where(a => a.Id == account.Id).First().AddMoney(addedMoney);
+        {            
             _accounts.Where(a => a.Id == account.Id).First().AddMoney(addedMoney);
+
+            OnLog?.Invoke("Внесение денег на счёт"); //По идее тут нужна информация
         }
 
         public override string ToString()
@@ -98,33 +105,5 @@ namespace Homework_12_notMVVM.Model.Data
         {
             return new Client(this._id, this._name, this._accounts);
         }
-
-        ///// <summary>
-        ///// Открытие накопительного счёта
-        ///// </summary>
-        ///// <param name="currency">Валюта счёта</param>
-        ///// <param name="rate">Ставка счёта</param>
-        //public void OpenNewAccount(AccountBase.CurrencyEnum currency, double rate)
-        //{
-        //    int newAccontId = StaticMainData.Accounts.GetNewId();
-        //    AccountBase addingAccount = new AccountSavings(newAccontId, currency, _id, rate); ;
-        //    StaticMainData.Accounts.Add(addingAccount);
-        //    //добавление ссылки на счет клиента в данные клиента
-        //    _accounts.Add(addingAccount);
-        //}
-
-        ///// <summary>
-        ///// Открытие расчётного счета
-        ///// </summary>
-        ///// <param name="currency">Валюта счета</param>
-        //public void OpenNewAccount(AccountBase.CurrencyEnum currency)
-        //{
-        //    int newAccontId = StaticMainData.Accounts.GetNewId();
-        //    AccountBase addingAccount = new AccountPayment(newAccontId, currency, _id); ;
-        //    StaticMainData.Accounts.Add(addingAccount);
-        //    //добавление ссылки на счет клиента в данные клиента
-        //    _accounts.Add(addingAccount);
-        //}
-
     }
 }

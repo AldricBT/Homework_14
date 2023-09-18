@@ -10,11 +10,10 @@ namespace Homework_12_notMVVM.Model.Data
 {
     public class AccountsData : DataBase<AccountBase>
     {
-        private readonly string _pathToAccountData;
         public AccountsData(string pathToAccountData) :
             base(pathToAccountData)
         {
-            _pathToAccountData = pathToAccountData;
+           
         }
         /// <summary>
         /// Получает уникальный Id нового счета
