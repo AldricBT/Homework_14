@@ -96,6 +96,7 @@
     <Compile Include="Model\Data\Log\LogMessage.cs" />
     <Compile Include="ViewModels\AddClientWindowViewModel.cs" />
     <Compile Include="ViewModels\AddMoneyWindowViewModel.cs" />
+    <Compile Include="ViewModels\LogWindowViewModel.cs" />
     <Compile Include="ViewModels\NewAccountWindowViewModel.cs" />
     <Compile Include="ViewModels\TransferMoneyWindowViewModel.cs" />
     <Compile Include="View\AddClientWindow.xaml.cs">

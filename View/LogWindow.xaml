@@ -5,20 +5,22 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Homework_12_notMVVM.View"
         mc:Ignorable="d"
-        Title="Журнал действий" Height="450" Width="800">
+        Title="Журнал действий" Height="500" Width="500"
+        WindowStartupLocation="Manual"
+        Left="1085"  Top="200">
 
     <DockPanel>
-        <ListBox ItemsSource="{Binding LogInfo}">
+        <ListBox ItemsSource="{Binding LogRecords}">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto" SharedSizeGroup="MessageTimeColumn"/>
-                            <ColumnDefinition Width="3"/>
+                            <ColumnDefinition Width="30"/>
                             <ColumnDefinition/>
                         </Grid.ColumnDefinitions>
-                        <TextBlock Grid.Column="0" Text="{Binding Time, StringFormat=HH:mm:ss, Mode=OneTime}"/>
-                        <TextBlock Grid.Column="2" Text="{Binding Text, Mode=OneTime}"/>
+                        <TextBlock Grid.Column="0" Text="{Binding Date, StringFormat=HH:mm:ss, Mode=OneTime}"/>
+                        <TextBlock Grid.Column="2" Text="{Binding Message, Mode=OneTime}"/>
                     </Grid>
                 </DataTemplate>
             </ListBox.ItemTemplate>

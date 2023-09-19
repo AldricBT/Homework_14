@@ -7,7 +7,9 @@
         xmlns:vm="clr-namespace:Homework_12_notMVVM.ViewModels" 
         xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
         mc:Ignorable="d"
-        Title="Счета клиентов" Height="500" Width="1000">
+        Title="Счета клиентов" Height="500" Width="1000"
+        WindowStartupLocation="Manual"
+        Left="100" Top="200">
     <Window.DataContext>
         <vm:MainWindowViewModel/>
     </Window.DataContext>

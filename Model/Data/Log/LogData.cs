@@ -14,6 +14,14 @@ namespace Homework_12_notMVVM.Model.Data.Log
         {
           
         }
+
+        //переопределения метода Add для добавления лога с конца
+        public new void Add(LogMessage data)
+        {
+            Data.Insert(0,data);
+            Save();
+        }
+
         /// <summary>
         /// ID не используется в логах. Выбрасывает исключение
         /// </summary>

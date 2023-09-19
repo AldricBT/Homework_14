@@ -19,6 +19,7 @@ namespace Homework_12_notMVVM.Model.Data
         public ObservableCollection<T> Data
         {
             get => _dataList;
+            //protected set => _dataList = value;
         }
 
         /// <summary>

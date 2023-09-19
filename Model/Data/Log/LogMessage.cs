@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace Homework_12_notMVVM.Model.Data.Log
@@ -20,6 +21,13 @@ namespace Homework_12_notMVVM.Model.Data.Log
             _message = message;
         }
 
-       
+        [JsonConstructor]
+        public LogMessage(DateTime date, string message)
+        {
+            _date = date;
+            _message = message;
+        }
+
+
     }
 }

@@ -21,6 +21,10 @@ namespace Homework_12_notMVVM.ViewModels
 
         private Client _rememberSelectedClient; //запоминание выбранного клиента при открытии нового счёта
 
+        private LogWindow _logWindow;
+        private LogWindowViewModel _logWindowVM;
+
+
         #region Fields and properties
 
         #region Clients. База клиентов
@@ -202,10 +206,19 @@ namespace Homework_12_notMVVM.ViewModels
         public ICommand ShowLogCommand { get; set; } //здесь живет сама команда (это по сути обычное свойство, чтобы его можно было вызвать из хамл)
 
         private void OnShowLogCommandExecuted(object p) //логика команды
-        {            
-
+        {
+            _logWindow = new LogWindow();
+            _logWindowVM = new LogWindowViewModel();
+            _logWindow.DataContext = _logWindowVM;
+            _logWindow.Show();
         }
-        private bool CanShowLogCommandExecute(object p) => true;
+        private bool CanShowLogCommandExecute(object p)
+        {
+            if ((_logWindow != null) && (_logWindow.IsVisible))
+                return false;
+            return true;
+        }
+        
         #endregion
 
         #endregion 
@@ -228,19 +241,10 @@ namespace Homework_12_notMVVM.ViewModels
             AddClientMainCommand = new RelayCommand(OnAddClientMainCommandExecuted, CanAddClientMainCommandExecute);
             ShowLogCommand = new RelayCommand(OnShowLogCommandExecuted, CanShowLogCommandExecute);
         }
+                
         #endregion
 
-        /// <summary>
-        /// Инициализирует события (для записи в лог) ПРИ СОЗДАНИИ КЛИЕНТА!
-        /// </summary>
-        //private void InitialiseHandlerEvents()
-        //{
-        //    _selectedClient.AddAccountLog += (clientId, accountId) =>
-        //    {
-        //        StaticMainData.Log.Add(new LogMessage($"У клиента #{clientId} открыт новый счёт #{accountId}"));
-        //    };
-        //}
-
+        
 
 
 
@@ -248,7 +252,7 @@ namespace Homework_12_notMVVM.ViewModels
         {            
             Clients = StaticMainData.Clients.Data;
             InitializeCommand();
-            //InitialiseHandlerEvents();
+
         }
     }
 }
