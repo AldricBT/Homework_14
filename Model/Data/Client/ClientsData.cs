@@ -33,6 +33,7 @@ namespace Homework_12_notMVVM.Model.Data
             base.Add(client);
             _addClientLog?.Invoke(client.Id, client.Name);
         }
+               
 
         /// <summary>
         /// Удаление клиента по id

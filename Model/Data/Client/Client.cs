@@ -56,6 +56,22 @@ namespace Homework_12_notMVVM.Model.Data
                 _removeAccountLog -= value;
             }
         }
+
+        private Action<int, int> _transferMoneyLog;
+        public event Action<int, int> TransferMoneyLog
+        {
+            add
+            {
+                _transferMoneyLog -= value;
+                _transferMoneyLog += value;
+            }
+            remove
+            {
+                _transferMoneyLog -= value;
+            }
+        }
+        
+
         #endregion
 
         private int _id;
@@ -137,6 +153,7 @@ namespace Homework_12_notMVVM.Model.Data
             _accounts.Where(a => a.Id == account.Id).First().AddMoney(addedMoney);
 
             _addMoneyLog?.Invoke(Id, account.Id, addedMoney, account.Currency);
+            //_transferMoneyLog?.Invoke(Id, );
         }
 
         public override string ToString()

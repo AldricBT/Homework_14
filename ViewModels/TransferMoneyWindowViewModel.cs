@@ -12,6 +12,7 @@ using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows;
 using System.Windows.Input;
+using Homework_12_notMVVM.Model.Data.Log;
 
 namespace Homework_12_notMVVM.ViewModels
 {
@@ -77,7 +78,9 @@ namespace Homework_12_notMVVM.ViewModels
         private void OnTransferMoneyDialogCommandExecuted(object p) //логика команды
         {
             if (Transfer())
+            {
                 _window.DialogResult = true;
+            }                
         }
         private bool CanTransferMoneyDialogCommandExecute(object p)
         {
@@ -126,9 +129,22 @@ namespace Homework_12_notMVVM.ViewModels
                 return false;
             }
 
-            targetClient.AddMoney(targetAccount, int.Parse(_transferMoney));
-            // снятие денег со счёта источника
-            _client.AddMoney(_account, -int.Parse(_transferMoney));
+            //_client.AddMoneyLog += 
+            //_client.TransferMoneyLog += (clientId, accountId, moneyTransfer, currency) =>
+            //{
+            //    StaticMainData.Log.Add(new LogMessage($"Клиент #{clientId} перевел на счёт #{accountId} {moneyTransfer} {currency}"));
+            //};
+
+            //targetAccount.AddMoney(int.Parse(_transferMoney));
+            //// снятие денег со счёта источника
+            //_client.AddMoney(_account, -int.Parse(_transferMoney));
+            _account.TransferMoneyLog += (sourceId, targetId, money, currency) =>
+            {
+                StaticMainData.Log.Add(new LogMessage($"Со счёта #{sourceId} на счёт #{targetId} выполнен перевод на сумму {money} {currency}"));
+            };
+
+            _account.TransferMoney(targetAccount, int.Parse(_transferMoney));
+
             StaticMainData.SaveAllData();
 
             messageBoxText = $"Перевод выполнен успешно!";

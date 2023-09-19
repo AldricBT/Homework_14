@@ -4,9 +4,11 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using System.Security.Principal;
 using System.Text;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace Homework_12_notMVVM.Model.Data.Account
 {
@@ -14,7 +16,20 @@ namespace Homework_12_notMVVM.Model.Data.Account
     [JsonDerivedType(typeof(AccountSavings), typeDiscriminator: "savings")]    
     public abstract class AccountBase : INotifyPropertyChanged
     {
-        
+        private Action<int, int, int, CurrencyEnum> _transferMoneyLog;
+        public event Action<int, int, int, CurrencyEnum> TransferMoneyLog
+        {
+            add
+            {
+                _transferMoneyLog -= value;
+                _transferMoneyLog += value;
+            }
+            remove
+            {
+                _transferMoneyLog -= value;
+            }
+        }
+
         public enum CurrencyEnum
         {
             RUR,
@@ -86,6 +101,14 @@ namespace Homework_12_notMVVM.Model.Data.Account
             Money += moneyAdded;
         }
 
+
+        // валидность ввода не проверяется
+        public void TransferMoney(AccountBase target, int money)
+        {
+            target.AddMoney(money);
+            _money -= money;
+            _transferMoneyLog?.Invoke(Id, target.Id, money, Currency);
+        }
         #region Реализация INPC
         public event PropertyChangedEventHandler PropertyChanged;
 
