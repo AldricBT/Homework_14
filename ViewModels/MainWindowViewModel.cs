@@ -137,6 +137,11 @@ namespace Homework_12_notMVVM.ViewModels
             if (MessageBoxResult.No == result)
                 return;
 
+            _selectedClient.RemoveAccountLog += (clientId, accountId) =>
+            {
+                StaticMainData.Log.Add(new LogMessage($"Клиент #{clientId} закрыл счёт #{accountId}"));
+            };
+
             _selectedClient.RemoveAccount(_selectedAccount);            
             StaticMainData.SaveAllData();
 

@@ -43,6 +43,19 @@ namespace Homework_12_notMVVM.Model.Data
             }
         }
 
+        private Action<int, int> _removeAccountLog;
+        public event Action<int, int> RemoveAccountLog
+        {
+            add 
+            { 
+                _removeAccountLog -= value;
+                _removeAccountLog += value;
+            }
+            remove
+            {
+                _removeAccountLog -= value;
+            }
+        }
         #endregion
 
         private int _id;
@@ -111,7 +124,7 @@ namespace Homework_12_notMVVM.Model.Data
             StaticMainData.Accounts.Remove(account);
             _accounts.Remove(account);
 
-            //OnLog?.Invoke(); 
+            _removeAccountLog?.Invoke(Id, account.Id);
         }
 
         /// <summary>
