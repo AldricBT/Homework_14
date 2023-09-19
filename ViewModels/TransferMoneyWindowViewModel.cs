@@ -129,15 +129,6 @@ namespace Homework_12_notMVVM.ViewModels
                 return false;
             }
 
-            //_client.AddMoneyLog += 
-            //_client.TransferMoneyLog += (clientId, accountId, moneyTransfer, currency) =>
-            //{
-            //    StaticMainData.Log.Add(new LogMessage($"Клиент #{clientId} перевел на счёт #{accountId} {moneyTransfer} {currency}"));
-            //};
-
-            //targetAccount.AddMoney(int.Parse(_transferMoney));
-            //// снятие денег со счёта источника
-            //_client.AddMoney(_account, -int.Parse(_transferMoney));
             _account.TransferMoneyLog += (sourceId, targetId, money, currency) =>
             {
                 StaticMainData.Log.Add(new LogMessage($"Со счёта #{sourceId} на счёт #{targetId} выполнен перевод на сумму {money} {currency}"));
