@@ -1,6 +1,7 @@
 ﻿using Homework_12_notMVVM.Infrastructure.Commands;
 using Homework_12_notMVVM.Model.Data;
 using Homework_12_notMVVM.Model.Data.Account;
+using Homework_12_notMVVM.Model.Data.Log;
 using Homework_12_notMVVM.View;
 using Homework_12_notMVVM.ViewModels.Base;
 using System;
@@ -43,10 +44,14 @@ namespace Homework_12_notMVVM.ViewModels
 
         private void OnAddMoneyDialogCommandExecuted(object p) //логика команды
         {
-            StaticMainData.Clients.Data.Where(c => c.Id == _selectedClient.Id).First().AddMoney(_selectedAccount, int.Parse(_addedMoney));
-            
+            _selectedClient.AddMoneyLog += (clientId, accountId, moneyAdded, currency) =>
+            {
+                StaticMainData.Log.Add(new LogMessage($"Клиент #{clientId} внес на счёт #{accountId} {moneyAdded} {currency}"));
+            };
+
+            StaticMainData.Clients.Data.Where(c => c.Id == _selectedClient.Id).First().AddMoney(_selectedAccount, int.Parse(_addedMoney));            
             StaticMainData.SaveAllData();
-            OnPropertyChanged("ClientAccounts");
+            //OnPropertyChanged("ClientAccounts");
             _addMoneyWindow.DialogResult = true;            
         }
         private bool CanAddMoneyDialogCommandExecute(object p)

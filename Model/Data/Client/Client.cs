@@ -13,6 +13,8 @@ namespace Homework_12_notMVVM.Model.Data
 {
     public class Client : ViewModel, ICloneable //чтобы заново не реализовывать INPC
     {
+        #region Events for Log
+
         private Action<int, int> _addAccountLog;
         public event Action<int, int> AddAccountLog
         {
@@ -26,6 +28,22 @@ namespace Homework_12_notMVVM.Model.Data
                 _addAccountLog -= value;
             }
         }
+                
+        private Action<int, int, int, AccountBase.CurrencyEnum> _addMoneyLog;        
+        public event Action<int, int, int, AccountBase.CurrencyEnum> AddMoneyLog
+        {
+            add
+            {
+                _addMoneyLog -= value;
+                _addMoneyLog += value;
+            }
+            remove
+            {
+                _addMoneyLog -= value;
+            }
+        }
+
+        #endregion
 
         private int _id;
         private string _name;
@@ -105,7 +123,7 @@ namespace Homework_12_notMVVM.Model.Data
         {            
             _accounts.Where(a => a.Id == account.Id).First().AddMoney(addedMoney);
 
-            //OnLog?.Invoke(); 
+            _addMoneyLog?.Invoke(Id, account.Id, addedMoney, account.Currency);
         }
 
         public override string ToString()
