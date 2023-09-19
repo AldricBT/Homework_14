@@ -12,7 +12,27 @@ using System.Threading.Tasks;
 namespace Homework_12_notMVVM.Model.Data
 {
     public class ClientsData : DataBase<Client>
-    {          
+    {
+
+        private Action<int, string> _addClientLog;
+        public event Action<int, string> AddClientLog
+        {
+            add
+            {
+                _addClientLog -= value;
+                _addClientLog += value;
+            }
+            remove
+            {
+                _addClientLog -= value;
+            }
+        }
+
+        public new void Add(Client client)
+        {
+            base.Add(client);
+            _addClientLog?.Invoke(client.Id, client.Name);
+        }
 
         /// <summary>
         /// Удаление клиента по id

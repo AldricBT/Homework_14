@@ -1,5 +1,6 @@
 ﻿using Homework_12_notMVVM.Infrastructure.Commands;
 using Homework_12_notMVVM.Model.Data;
+using Homework_12_notMVVM.Model.Data.Log;
 using Homework_12_notMVVM.View;
 using Homework_12_notMVVM.ViewModels.Base;
 using System;
@@ -28,8 +29,15 @@ namespace Homework_12_notMVVM.ViewModels
 
         private void OnAddClientDialogCommandExecuted(object p) //логика команды
         {
-            StaticMainData.Clients.Add(new Client(StaticMainData.Clients.GetNewId(), _clientName));
-            _window.DialogResult = true;
+            Client newClient = new Client(StaticMainData.Clients.GetNewId(), _clientName);
+
+            StaticMainData.Clients.AddClientLog += (newClientId, newCLientName) =>
+            {
+                StaticMainData.Log.Add(new LogMessage($"Добавлен новый клиент #{newClientId}: {newCLientName}"));
+            };
+
+            StaticMainData.Clients.Add(newClient);
+            _window.DialogResult = true;            
         }
         private bool CanAddClientDialogCommandExecute(object p)
         {
@@ -46,6 +54,8 @@ namespace Homework_12_notMVVM.ViewModels
         {
             _window = window;
             AddClientDialogCommand = new RelayCommand(OnAddClientDialogCommandExecuted, CanAddClientDialogCommandExecute);
+
+
         }
 
         
