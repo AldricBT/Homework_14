@@ -1,12 +1,11 @@
-﻿using Homework_12_notMVVM.Model.Data.Log;
-using Homework_12_notMVVM.ViewModels.Base;
+﻿using Model_Library.Log;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Homework_12_notMVVM.Model.Data
+namespace Model_Library
 {
     // Статический класс для хранения данных
     public static class StaticMainData

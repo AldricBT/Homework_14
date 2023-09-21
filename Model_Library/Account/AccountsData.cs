@@ -1,4 +1,4 @@
-﻿using Homework_12_notMVVM.Model.Data.Account;
+﻿using Model_Library.Account;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Homework_12_notMVVM.Model.Data
+namespace Model_Library
 {
     public class AccountsData : DataBase<AccountBase>
     {

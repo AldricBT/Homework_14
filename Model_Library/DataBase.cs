@@ -8,7 +8,7 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
-namespace Homework_12_notMVVM.Model.Data
+namespace Model_Library
 {    
     public abstract class DataBase<T>
         where T : class
@@ -19,7 +19,6 @@ namespace Homework_12_notMVVM.Model.Data
         public ObservableCollection<T> Data
         {
             get => _dataList;
-            //protected set => _dataList = value;
         }
 
         /// <summary>

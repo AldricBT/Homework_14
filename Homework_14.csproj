@@ -92,8 +92,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Model\Data\Log\LogData.cs" />
-    <Compile Include="Model\Data\Log\LogMessage.cs" />
     <Compile Include="ViewModels\AddClientWindowViewModel.cs" />
     <Compile Include="ViewModels\AddMoneyWindowViewModel.cs" />
     <Compile Include="ViewModels\LogWindowViewModel.cs" />
@@ -152,14 +150,6 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Model\Data\Account\AccountsData.cs" />
-    <Compile Include="Model\Data\Account\AccountBase.cs" />
-    <Compile Include="Model\Data\Account\AccountPayment.cs" />
-    <Compile Include="Model\Data\Account\AccountSavings.cs" />
-    <Compile Include="Model\Data\Base\DataBase.cs" />
-    <Compile Include="Model\Data\Client\Client.cs" />
-    <Compile Include="Model\Data\Client\ClientsData.cs" />
-    <Compile Include="Model\Data\StaticMainData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -185,6 +175,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="Model_Library\Model_Library.csproj">
+      <Project>{c0fee662-0cd7-419f-8e24-8af79f61c85d}</Project>
+      <Name>Model_Library</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

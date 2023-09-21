@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DataWork_Library.Log
+namespace Model_Library.Log
 {
     public class LogData : DataBase<LogMessage>
     {

@@ -1,16 +1,16 @@
-﻿using Homework_12_notMVVM.Infrastructure.Commands;
-using Homework_12_notMVVM.Model.Data;
-using Homework_12_notMVVM.Model.Data.Log;
-using Homework_12_notMVVM.View;
-using Homework_12_notMVVM.ViewModels.Base;
+﻿using Homework_14.Infrastructure.Commands;
+using Homework_14.View;
+using Homework_14.ViewModels.Base;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using Model_Library;
+using Model_Library.Log;
 
-namespace Homework_12_notMVVM.ViewModels
+namespace Homework_14.ViewModels
 {
     internal class AddClientWindowViewModel : ViewModel
     {

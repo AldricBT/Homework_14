@@ -1,6 +1,6 @@
-﻿using Homework_12_notMVVM.Model.Data;
-using Homework_12_notMVVM.Model.Data.Log;
-using Homework_12_notMVVM.ViewModels.Base;
+﻿using Homework_14.ViewModels.Base;
+using Model_Library;
+using Model_Library.Log;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -8,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Homework_12_notMVVM.ViewModels
+namespace Homework_14.ViewModels
 {
     internal class LogWindowViewModel : ViewModel
     {

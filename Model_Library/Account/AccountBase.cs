@@ -1,5 +1,4 @@
-﻿using Homework_12_notMVVM.ViewModels.Base;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -10,7 +9,7 @@ using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 using System.Windows;
 
-namespace Homework_12_notMVVM.Model.Data.Account
+namespace Model_Library.Account
 {
     [JsonDerivedType(typeof(AccountPayment), typeDiscriminator: "payments")]
     [JsonDerivedType(typeof(AccountSavings), typeDiscriminator: "savings")]    
@@ -109,6 +108,7 @@ namespace Homework_12_notMVVM.Model.Data.Account
             _money -= money;
             _transferMoneyLog?.Invoke(Id, target.Id, money, Currency);
         }
+
         #region Реализация INPC
         public event PropertyChangedEventHandler PropertyChanged;
 

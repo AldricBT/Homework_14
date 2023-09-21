@@ -1,8 +1,6 @@
-﻿using Homework_12_notMVVM.Infrastructure.Commands;
-using Homework_12_notMVVM.Model.Data;
-using Homework_12_notMVVM.Model.Data.Account;
-using Homework_12_notMVVM.View;
-using Homework_12_notMVVM.ViewModels.Base;
+﻿using Homework_14.Infrastructure.Commands;
+using Homework_14.View;
+using Homework_14.ViewModels.Base;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -12,9 +10,11 @@ using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows;
 using System.Windows.Input;
-using Homework_12_notMVVM.Model.Data.Log;
+using Model_Library.Account;
+using Model_Library;
+using Model_Library.Log;
 
-namespace Homework_12_notMVVM.ViewModels
+namespace Homework_14.ViewModels
 {
     internal class TransferMoneyWindowViewModel : ViewModel
     {

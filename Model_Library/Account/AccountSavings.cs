@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Homework_12_notMVVM.Model.Data.Account
+namespace Model_Library.Account
 {
     public class AccountSavings : AccountBase
     {

@@ -9,7 +9,7 @@ using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
 
-namespace Homework_12_notMVVM.Model.Data
+namespace Model_Library
 {
     public class ClientsData : DataBase<Client>
     {
