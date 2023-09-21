@@ -5,7 +5,7 @@ using System.Text;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
-namespace Homework_12_notMVVM.Model.Data.Log
+namespace DataWork_Library.Log
 {
     public class LogMessage
     {
