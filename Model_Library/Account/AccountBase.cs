@@ -94,9 +94,7 @@ namespace Model_Library.Account
         /// </summary>
         /// <param name="moneyAdded">Добавляемая или снимаемая сумма</param>
         public void AddMoney(double moneyAdded)
-        {
-            if ((Money + moneyAdded) < 0)
-                return;
+        {            
             Money += moneyAdded;
         }
 
@@ -105,7 +103,7 @@ namespace Model_Library.Account
         public void TransferMoney(AccountBase target, int money)
         {
             target.AddMoney(money);
-            _money -= money;
+            AddMoney(-money);
             _transferMoneyLog?.Invoke(Id, target.Id, money, Currency);
         }
 

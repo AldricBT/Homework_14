@@ -1,5 +1,4 @@
-﻿using Homework_12_notMVVM.ViewModels;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using Microsoft.Extensions.DependencyInjection;
 using System.Configuration;
@@ -7,9 +6,8 @@ using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
-using Homework_12_notMVVM.View;
 
-namespace Homework_12_notMVVM
+namespace Homework_14
 {
     /// <summary>
     /// Interaction logic for App.xaml

@@ -96,7 +96,7 @@ namespace Model_Library
         public ObservableCollection<AccountBase> Accounts
         {
             get => _accounts;
-            private set => _accounts = value;
+            private set => Set(ref _accounts, value);
         }
 
         public Client(int id, string name)
@@ -154,7 +154,6 @@ namespace Model_Library
             _accounts.Where(a => a.Id == account.Id).First().AddMoney(addedMoney);
 
             _addMoneyLog?.Invoke(Id, account.Id, addedMoney, account.Currency);
-            //_transferMoneyLog?.Invoke(Id, );
         }
 
         public override string ToString()

@@ -1,7 +1,4 @@
-﻿using Homework_12_notMVVM.Model;
-using Homework_12_notMVVM.Model.Data;
-using Homework_12_notMVVM.ViewModels;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -16,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Homework_12_notMVVM
+namespace Homework_14
 {
     
     public partial class MainWindow : Window
