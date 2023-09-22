@@ -13,6 +13,7 @@ using System.Windows.Input;
 using Model_Library.Account;
 using Model_Library;
 using Model_Library.Log;
+using Homework_12_notMVVM.Infrastructure;
 
 namespace Homework_14.ViewModels
 {
@@ -102,9 +103,15 @@ namespace Homework_14.ViewModels
             string messageBoxText, caption;
             MessageBoxButton button;
             MessageBoxImage icon;
+            
             //проверка на существование счёта куда переводят
-            bool isSourseIdNotValid = (StaticMainData.Accounts.Data.Where(a => a.Id == int.Parse(_targetId)).Count() == 0);
-            if (isSourseIdNotValid)
+            try
+            {
+                bool isSourseIdNotValid = (StaticMainData.Accounts.Data.Where(a => a.Id == int.Parse(_targetId)).Count() == 0);
+                if (isSourseIdNotValid)
+                    throw new NotValidInputExeption();                
+            }
+            catch (Exception)
             {
                 messageBoxText = $"Введенного номера счёта не существует!";
                 caption = $"Неудалось выполнить перевод";
@@ -113,6 +120,10 @@ namespace Homework_14.ViewModels
                 MessageBox.Show(messageBoxText, caption, button, icon, MessageBoxResult.Yes);
                 return false;
             }
+
+           
+            
+            
 
             // перевод денег на целевой счёт
             Client targetClient = StaticMainData.Clients.Data.Where(c => c.Accounts.Any(a => a.Id == int.Parse(_targetId))).First();

@@ -92,6 +92,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Infrastructure\NotValidInputExeption.cs" />
     <Compile Include="ViewModels\AddClientWindowViewModel.cs" />
     <Compile Include="ViewModels\AddMoneyWindowViewModel.cs" />
     <Compile Include="ViewModels\LogWindowViewModel.cs" />
