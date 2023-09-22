@@ -102,7 +102,6 @@ namespace Model_Library.Account
         // валидность ввода не проверяется
         public void TransferMoney(AccountBase target, int money)
         {
-            target.AddMoney(money);
             AddMoney(-money);
             _transferMoneyLog?.Invoke(Id, target.Id, money, Currency);
         }
