@@ -136,6 +136,8 @@ namespace Homework_14.ViewModels
 
             _account.TransferMoney(targetAccount, int.Parse(_transferMoney));
 
+            //StaticMainData.Clients.TransferMoney(_account, targetAccount, int.Parse(_transferMoney));
+
             StaticMainData.SaveAllData();
 
             messageBoxText = $"Перевод выполнен успешно!";

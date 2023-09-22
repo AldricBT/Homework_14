@@ -156,6 +156,8 @@ namespace Model_Library
             _addMoneyLog?.Invoke(Id, account.Id, addedMoney, account.Currency);
         }
 
+        
+
         public override string ToString()
         {
             return $"{Id}: {Name}, numofacc: {Accounts.Count} ";

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Model_Library.Account;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -55,7 +56,7 @@ namespace Model_Library
                 return 1;
             return Data.Max(c => c.Id) + 1;
         }
-
+                
         public ClientsData(string pathToData) :
             base(pathToData)        
         {

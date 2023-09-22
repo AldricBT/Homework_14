@@ -56,7 +56,6 @@ namespace Model_Library
             _accounts = new AccountsData(_pathToAccountsData);
             _clients = new ClientsData(_pathToClientsData);
             _log = new LogData(_pathToLogData);
-            
         }
     }
 }
