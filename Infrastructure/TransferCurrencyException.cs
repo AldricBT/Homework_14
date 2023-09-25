@@ -6,10 +6,9 @@ using System.Threading.Tasks;
 
 namespace Homework_12_notMVVM.Infrastructure
 {
-    internal class NotValidInputExeption : Exception
+    internal class TransferCurrencyException : Exception
     {
-        private readonly string _message = "Неверный ввод!";
+        private readonly string _message = "Выбранный счёт открыт на другую валюту!";
         public override string Message => _message;
-        
     }
 }

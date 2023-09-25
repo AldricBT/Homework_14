@@ -100,45 +100,36 @@ namespace Homework_14.ViewModels
         /// </summary>
         private bool Transfer()
         {
+            // перевод денег на целевой счёт
+            Client targetClient;
+            AccountBase targetAccount;
+
             string messageBoxText, caption;
             MessageBoxButton button;
-            MessageBoxImage icon;
-            
+            MessageBoxImage icon;            
             //проверка на существование счёта куда переводят
             try
             {
                 bool isSourseIdNotValid = (StaticMainData.Accounts.Data.Where(a => a.Id == int.Parse(_targetId)).Count() == 0);
                 if (isSourseIdNotValid)
-                    throw new NotValidInputExeption();                
+                    throw new NotValidInputException();
+
+                targetClient = StaticMainData.Clients.Data.Where(c => c.Accounts.Any(a => a.Id == int.Parse(_targetId))).First();
+                targetAccount = StaticMainData.Accounts.Data.Where(a => a.Id == int.Parse(_targetId)).First();
+
+                bool isTransferNotValid = (targetAccount.Currency != _sourceCurrency);
+                if (isTransferNotValid)
+                    throw new TransferCurrencyException();                
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                messageBoxText = $"Введенного номера счёта не существует!";
                 caption = $"Неудалось выполнить перевод";
                 button = MessageBoxButton.OK;
                 icon = MessageBoxImage.Warning;
-                MessageBox.Show(messageBoxText, caption, button, icon, MessageBoxResult.Yes);
+                MessageBox.Show(e.Message, caption, button, icon, MessageBoxResult.Yes);
                 return false;
             }
-
-           
             
-            
-
-            // перевод денег на целевой счёт
-            Client targetClient = StaticMainData.Clients.Data.Where(c => c.Accounts.Any(a => a.Id == int.Parse(_targetId))).First();
-            AccountBase targetAccount = StaticMainData.Accounts.Data.Where(a => a.Id == int.Parse(_targetId)).First();
-
-            bool isTransferNotValid = (targetAccount.Currency != _sourceCurrency);
-            if (isTransferNotValid)
-            {
-                messageBoxText = $"Выбранный счёт открыт на другую валюту!";
-                caption = $"Неудалось выполнить перевод";
-                button = MessageBoxButton.OK;
-                icon = MessageBoxImage.Warning;
-                MessageBox.Show(messageBoxText, caption, button, icon, MessageBoxResult.Yes);
-                return false;
-            }
 
             _account.TransferMoneyLog += (sourceId, targetId, money, currency) =>
             {
